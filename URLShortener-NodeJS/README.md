@@ -1,10 +1,10 @@
 # URL Shortener
 
-URL Shortener Microservice - [Live Version] (https://xvi.herokuapp.com/)  
+URL Shortener Microservice - [https://xvi.herokuapp.com/] (Live Version)  
 
 Allows users to input a URL, and get a shortened URL in return, which will redirect to the original URL. In my case, my original URL is long, it often ends up returning a longer URL than the original input. Perhaps one day I'll move on from the free Heroku plan and fix this.
 
-This is a [Free Code Camp Project] (https://www.freecodecamp.com/challenges/url-shortener-microservice)
+This is a [https://www.freecodecamp.com/challenges/url-shortener-microservice] (FreeCodeCamp Project)
 
 Technologies used:
 
