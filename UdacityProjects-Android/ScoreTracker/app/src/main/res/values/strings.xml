@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ScoreTracker</string>
+    <string name="team_A">Team A</string>
+    <string name="team_B">Team B</string>
+    <string name="initial_score">0</string>
+    <string name="plus_one">+1</string>
+    <string name="plus_two">+2</string>
+    <string name="reset">Reset</string>
+</resources>

@@ -1,0 +1,23 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Primary theme color of the app (sets background color of app bar) -->
+        <item name="colorPrimary">#5D4037</item>
+        <item name="colorPrimaryDark">#FF5722</item>
+        <!-- Background color of buttons in the app -->
+        <item name="colorButtonNormal">#FF5722</item>
+        <item name="colorAccent">#FF5722</item>
+    </style>
+
+    <!-- Headers theme -->
+    <style name="HeaderTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+
+
+</resources>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/questions"
+            android:paddingTop="0dp"
+            android:layout_height="wrap_content"
+            android:text="Question 1: Which of the following are NOT Star Wars characters?" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            style="@style/answers"
+            android:layout_height="wrap_content"
+            android:text="Princess Leia" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            style="@style/answers"
+            android:layout_height="wrap_content"
+            android:text="Captain Kirk"
+            android:id="@+id/correct1"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            style="@style/answers"
+            android:layout_height="wrap_content"
+            android:text="Jean-Luc Picard"
+            android:id="@+id/correct2"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            style="@style/answers"
+            android:layout_height="wrap_content"
+            android:text="Luke Skywalker" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/questions"
+            android:text="Question 2: Who wrote the Harry Potter books?" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="JRR Tolkien" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="George RR Martin" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:id="@+id/correct3"
+                android:text="JK Rowling" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="Christopher Paolini" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            style="@style/questions"
+            android:text="Question 3: What does RAM stand for?" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            style="@style/answers"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="Rock And Mold" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="Rick Astley's Mom" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="Rats and Mice" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                style="@style/answers"
+                android:layout_height="wrap_content"
+                android:id="@+id/correct4"
+                android:text="Random Access Memory" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/questions"
+            android:text="Question 4: When was Google founded?" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/correct5"
+                style="@style/answers"
+                android:text="1998" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="2002" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/answers"
+                android:text="1996" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                style="@style/answers"
+                android:layout_height="wrap_content"
+                android:text="2038" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0288D1"
+                android:onClick="submit"
+                android:id="@+id/submitButton"
+                android:text="Submit" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:background="#FFC107"
+                android:layout_height="wrap_content"
+                android:id="@+id/resetButton"
+                android:onClick="reset"
+                android:text="Reset" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

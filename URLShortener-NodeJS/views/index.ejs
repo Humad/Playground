@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Shorten your URLs">
+        <meta name="keywords" content="url shortener">
+        <meta name="author" content="Humad Shah">
+    </head>
+
+
+    <body>
+        Enter the url you would like to shorten
+        Note: It must be in the correct format
+        <form id="form">
+            <input type="url" id="url" required>
+            <input type="submit">
+        </form>
+
+        <a href="" id="shortenedURL" ></a>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+        <script>
+            $(document).ready(function(){
+
+                function saveURL(url){
+                    console.log("url is " + url);
+                    $.ajax({
+                        type: "POST",
+                        url: window.location.href,
+                        dataType: "json",
+                        data: {"url":url},
+                        success: function(data){
+                            console.log('successfully sent!');
+                            $("#shortenedURL").html(window.location.href + data.value);
+                            $("#shortenedURL").attr("href", window.location.href + data.value);
+                        },
+                        error: function(err){
+                            console.log("error  " + err.toString());
+                        }
+                    });
+                }
+
+                $("#form").submit(function(){
+                    saveURL(encodeURIComponent($("#url").val()));
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

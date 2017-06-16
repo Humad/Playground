@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.humad.birthdaycard.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/androidparty"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-light"
+        android:text="Happy Birthday!"
+        android:layout_margin="20dp"
+        android:textSize="45sp"
+        android:id="@+id/happyBirthdayText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="45sp"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-light"
+        android:text="From Humad!"
+        android:id="@+id/fromSenderText" />
+
+
+
+</RelativeLayout>
