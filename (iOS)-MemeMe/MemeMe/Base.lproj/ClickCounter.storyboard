@@ -46,6 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-126" y="131"/>
         </scene>
         <!--Click Counter Without Storyboard-->
         <scene sceneID="iBr-Wq-ENu">
