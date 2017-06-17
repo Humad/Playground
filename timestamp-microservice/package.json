@@ -1,0 +1,29 @@
+{
+  "name": "timestamp-microservice",
+  "version": "1.0.0",
+  "description": "A CodeCamp challenge; helped me practice NodeJS and Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Humad/timestamp-microservice.git"
+  },
+  "keywords": [
+    "timestamp",
+    "codecamp",
+    "nodejs",
+    "express"
+  ],
+  "author": "Humad Syed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Humad/timestamp-microservice/issues"
+  },
+  "homepage": "https://github.com/Humad/timestamp-microservice#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "moment": "^2.15.1"
+  }
+}
