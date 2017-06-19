@@ -12,9 +12,9 @@
 		6777AE141EF410D300BBD921 /* ClickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE121EF410D300BBD921 /* ClickCounter.storyboard */; };
 		6777AE161EF410D300BBD921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE151EF410D300BBD921 /* Assets.xcassets */; };
 		6777AE191EF410D300BBD921 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE171EF410D300BBD921 /* LaunchScreen.storyboard */; };
-		6777AE251EF419A800BBD921 /* ColorSwitcher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE241EF419A800BBD921 /* ColorSwitcher.storyboard */; };
 		67CEBE651EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CEBE641EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift */; };
 		67CEBE671EF5832B00969CF0 /* ColorSwitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CEBE661EF5832B00969CF0 /* ColorSwitcherViewController.swift */; };
+		67DD76DB1EF827EF0046CAF0 /* ColorSwitcher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +25,9 @@
 		6777AE151EF410D300BBD921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6777AE181EF410D300BBD921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6777AE1A1EF410D300BBD921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6777AE241EF419A800BBD921 /* ColorSwitcher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorSwitcher.storyboard; sourceTree = "<group>"; };
 		67CEBE641EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickCounterWithoutStoryboard.swift; sourceTree = "<group>"; };
 		67CEBE661EF5832B00969CF0 /* ColorSwitcherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitcherViewController.swift; sourceTree = "<group>"; };
+		67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorSwitcher.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				67CEBE661EF5832B00969CF0 /* ColorSwitcherViewController.swift */,
-				6777AE241EF419A800BBD921 /* ColorSwitcher.storyboard */,
+				67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */,
 			);
 			name = ColorSwitcher;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 				6777AE191EF410D300BBD921 /* LaunchScreen.storyboard in Resources */,
 				6777AE161EF410D300BBD921 /* Assets.xcassets in Resources */,
 				6777AE141EF410D300BBD921 /* ClickCounter.storyboard in Resources */,
-				6777AE251EF419A800BBD921 /* ColorSwitcher.storyboard in Resources */,
+				67DD76DB1EF827EF0046CAF0 /* ColorSwitcher.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
