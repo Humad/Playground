@@ -7,17 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		670CAEA91EFA94ED00FC58D1 /* ModalExperiment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 670CAEA81EFA94ED00FC58D1 /* ModalExperiment.storyboard */; };
+		670CAEAB1EFA953300FC58D1 /* ModalExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670CAEAA1EFA953300FC58D1 /* ModalExperimentViewController.swift */; };
 		6777AE0F1EF410D300BBD921 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777AE0E1EF410D300BBD921 /* AppDelegate.swift */; };
 		6777AE111EF410D300BBD921 /* ClickCounterWithStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777AE101EF410D300BBD921 /* ClickCounterWithStoryboard.swift */; };
 		6777AE141EF410D300BBD921 /* ClickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE121EF410D300BBD921 /* ClickCounter.storyboard */; };
 		6777AE161EF410D300BBD921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE151EF410D300BBD921 /* Assets.xcassets */; };
 		6777AE191EF410D300BBD921 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6777AE171EF410D300BBD921 /* LaunchScreen.storyboard */; };
+		67958B251EFAA7BF003848FC /* RPSSegueTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67958B241EFAA7BF003848FC /* RPSSegueTest.storyboard */; };
+		67958B271EFAAA34003848FC /* RPSSegueTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67958B261EFAAA34003848FC /* RPSSegueTestViewController.swift */; };
+		67958B291EFAAAB0003848FC /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67958B281EFAAAB0003848FC /* ResultsViewController.swift */; };
 		67CEBE651EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CEBE641EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift */; };
 		67CEBE671EF5832B00969CF0 /* ColorSwitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CEBE661EF5832B00969CF0 /* ColorSwitcherViewController.swift */; };
 		67DD76DB1EF827EF0046CAF0 /* ColorSwitcher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		670CAEA81EFA94ED00FC58D1 /* ModalExperiment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ModalExperiment.storyboard; sourceTree = "<group>"; };
+		670CAEAA1EFA953300FC58D1 /* ModalExperimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalExperimentViewController.swift; sourceTree = "<group>"; };
 		6777AE0B1EF410D300BBD921 /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6777AE0E1EF410D300BBD921 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6777AE101EF410D300BBD921 /* ClickCounterWithStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickCounterWithStoryboard.swift; sourceTree = "<group>"; };
@@ -25,6 +32,9 @@
 		6777AE151EF410D300BBD921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6777AE181EF410D300BBD921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6777AE1A1EF410D300BBD921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67958B241EFAA7BF003848FC /* RPSSegueTest.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RPSSegueTest.storyboard; sourceTree = "<group>"; };
+		67958B261EFAAA34003848FC /* RPSSegueTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPSSegueTestViewController.swift; sourceTree = "<group>"; };
+		67958B281EFAAAB0003848FC /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		67CEBE641EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickCounterWithoutStoryboard.swift; sourceTree = "<group>"; };
 		67CEBE661EF5832B00969CF0 /* ColorSwitcherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSwitcherViewController.swift; sourceTree = "<group>"; };
 		67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorSwitcher.storyboard; sourceTree = "<group>"; };
@@ -41,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		670CAEAC1EFA964200FC58D1 /* ModalExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				670CAEAA1EFA953300FC58D1 /* ModalExperimentViewController.swift */,
+				670CAEA81EFA94ED00FC58D1 /* ModalExperiment.storyboard */,
+			);
+			name = ModalExperiment;
+			sourceTree = "<group>";
+		};
 		6777AE021EF410D300BBD921 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +79,8 @@
 		6777AE0D1EF410D300BBD921 /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				67958B231EFAA7A5003848FC /* RockPaperScissors-SeguesTest */,
+				670CAEAC1EFA964200FC58D1 /* ModalExperiment */,
 				6777AE231EF4199800BBD921 /* ColorSwitcher */,
 				6777AE221EF4195D00BBD921 /* ClickCounter */,
 				6777AE0E1EF410D300BBD921 /* AppDelegate.swift */,
@@ -87,6 +108,16 @@
 				67DD76DA1EF827EF0046CAF0 /* ColorSwitcher.storyboard */,
 			);
 			name = ColorSwitcher;
+			sourceTree = "<group>";
+		};
+		67958B231EFAA7A5003848FC /* RockPaperScissors-SeguesTest */ = {
+			isa = PBXGroup;
+			children = (
+				67958B241EFAA7BF003848FC /* RPSSegueTest.storyboard */,
+				67958B261EFAAA34003848FC /* RPSSegueTestViewController.swift */,
+				67958B281EFAAAB0003848FC /* ResultsViewController.swift */,
+			);
+			name = "RockPaperScissors-SeguesTest";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +181,8 @@
 			files = (
 				6777AE191EF410D300BBD921 /* LaunchScreen.storyboard in Resources */,
 				6777AE161EF410D300BBD921 /* Assets.xcassets in Resources */,
+				67958B251EFAA7BF003848FC /* RPSSegueTest.storyboard in Resources */,
+				670CAEA91EFA94ED00FC58D1 /* ModalExperiment.storyboard in Resources */,
 				6777AE141EF410D300BBD921 /* ClickCounter.storyboard in Resources */,
 				67DD76DB1EF827EF0046CAF0 /* ColorSwitcher.storyboard in Resources */,
 			);
@@ -162,8 +195,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67958B271EFAAA34003848FC /* RPSSegueTestViewController.swift in Sources */,
 				67CEBE651EF5832000969CF0 /* ClickCounterWithoutStoryboard.swift in Sources */,
 				67CEBE671EF5832B00969CF0 /* ColorSwitcherViewController.swift in Sources */,
+				67958B291EFAAAB0003848FC /* ResultsViewController.swift in Sources */,
+				670CAEAB1EFA953300FC58D1 /* ModalExperimentViewController.swift in Sources */,
 				6777AE111EF410D300BBD921 /* ClickCounterWithStoryboard.swift in Sources */,
 				6777AE0F1EF410D300BBD921 /* AppDelegate.swift in Sources */,
 			);
