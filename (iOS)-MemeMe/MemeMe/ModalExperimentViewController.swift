@@ -18,7 +18,6 @@ class ModalExperimentViewController: UIViewController {
     
     
     @IBAction func showImagePickerController(_ sender: Any) {
-        
         let imagePicker = UIImagePickerController()
         self.present(imagePicker, animated: true, completion: nil)
     }

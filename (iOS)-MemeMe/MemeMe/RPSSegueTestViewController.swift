@@ -32,6 +32,7 @@ class RPSSegueTestViewController: UIViewController {
         return Int(1 + arc4random() % 3)
     }
     
+    // Performing a segue purely with code
     @IBAction func rockSegue(){
         
         let resultController = self.storyboard?.instantiateViewController(withIdentifier: "ResultsViewController") as! ResultsViewController
@@ -42,8 +43,8 @@ class RPSSegueTestViewController: UIViewController {
         self.present(resultController, animated: true, completion: nil)
     }
     
+    // Performing a segue with both code and storyboard
     @IBAction func paperSegue(){
-        
         performSegue(withIdentifier: "PaperSegue", sender: self)
     }
     
