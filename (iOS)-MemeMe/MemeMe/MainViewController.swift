@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "RPSSegueTest", bundle: nil)
         let rockPaperScissorsController = storyboard.instantiateViewController(withIdentifier: "RPSSegueTestViewController") as! RPSSegueTestViewController
         
-        self.present(rockPaperScissorsController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(rockPaperScissorsController, animated: true)
     }
     
     @IBAction func showModalExperiment(_ sender: Any) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gyL-qn-pAP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X3Y-h7-XMc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="nA6-cf-Y6B">
-                                <rect key="frame" x="16" y="28" width="342" height="639"/>
+                                <rect key="frame" x="16" y="72" width="342" height="595"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0V-os-2Va" userLabel="ShowRockPaperScissors">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="342" height="149"/>
                                         <color key="backgroundColor" red="1" green="0.072057580849999997" blue="0.050179425909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Rock Paper Scissors Segue Test"/>
                                         <connections>
@@ -34,7 +34,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uY-rl-Lsq">
-                                        <rect key="frame" x="0.0" y="160" width="342" height="159.5"/>
+                                        <rect key="frame" x="0.0" y="149" width="342" height="148.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.0" green="1" blue="0.031326614119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Modal Experiment"/>
@@ -43,7 +43,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYb-rg-nkE">
-                                        <rect key="frame" x="0.0" y="319.5" width="342" height="160"/>
+                                        <rect key="frame" x="0.0" y="297.5" width="342" height="149"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Show Color Switcher"/>
                                         <connections>
@@ -51,7 +51,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQ9-if-T19">
-                                        <rect key="frame" x="0.0" y="479.5" width="342" height="159.5"/>
+                                        <rect key="frame" x="0.0" y="446.5" width="342" height="148.5"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.031326614119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Click Counter"/>
                                         <connections>
@@ -69,10 +69,27 @@
                             <constraint firstItem="dUE-Y6-96k" firstAttribute="top" secondItem="nA6-cf-Y6B" secondAttribute="bottom" id="plr-qA-aRa"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="s4e-56-ryW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REj-mQ-WDr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-202.40000000000001" y="155.17241379310346"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vds-ko-8te">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nNi-r4-3hb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="X3Y-h7-XMc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6HL-T8-0Ft">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gyL-qn-pAP" kind="relationship" relationship="rootViewController" id="TfJ-Dt-gK3"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-1199" y="155"/>
         </scene>
     </scenes>
 </document>
