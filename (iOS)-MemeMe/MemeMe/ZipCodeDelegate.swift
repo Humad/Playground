@@ -20,6 +20,10 @@ class ZipCodeDelegate: NSObject, UITextFieldDelegate {
         var newText = textField.text! as NSString
         newText = newText.replacingCharacters(in: range, with: string) as NSString
         
+        if (newText.length == 0) {
+            return true
+        }
+        
         if newText.length > 5 || !isInt(newText as String) {
             return false
         }
