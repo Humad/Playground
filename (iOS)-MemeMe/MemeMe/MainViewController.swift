@@ -46,5 +46,12 @@ class MainViewController: UIViewController {
         
         self.navigationController?.pushViewController(clickCounterViewController, animated: true)
     }
+    
+    @IBAction func showTextFieldTest(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "TextFieldTest", bundle: nil)
+        let textFieldTestViewController = storyboard.instantiateViewController(withIdentifier: "TextFieldTestViewController") as! TextFieldTestViewController
+        
+        self.navigationController?.pushViewController(textFieldTestViewController, animated: true)
+    }
 
 }
