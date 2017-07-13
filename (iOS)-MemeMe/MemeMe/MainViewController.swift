@@ -53,5 +53,12 @@ class MainViewController: UIViewController {
         
         self.navigationController?.pushViewController(textFieldTestViewController, animated: true)
     }
+    
+    @IBAction func showMemeMeV1(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "MemeMeV1", bundle: nil)
+        let memeMeViewController = storyboard.instantiateViewController(withIdentifier: "MemeMeV1ViewController") as! MemeMeV1ViewController
+        
+        self.navigationController?.pushViewController(memeMeViewController, animated: true)
+    }
 
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Meme MeV1 View Controller-->
+        <scene sceneID="JBp-7R-SOI">
+            <objects>
+                <viewController storyboardIdentifier="MemeMeV1ViewController" id="dvy-ot-TSk" customClass="MemeMeV1ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SOu-nr-fG1"/>
+                        <viewControllerLayoutGuide type="bottom" id="rKl-ql-Fdb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O1g-X7-MeS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W8O-vO-bIK">
+                                <rect key="frame" x="16" y="99" width="343" height="500"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rc7-Tf-FxC">
+                                <rect key="frame" x="27" y="506" width="321" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Twm-55-ypk"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-9s-djm">
+                                <rect key="frame" x="86" y="617" width="75" height="30"/>
+                                <state key="normal" title="Pick Image"/>
+                                <connections>
+                                    <action selector="pickImage:" destination="dvy-ot-TSk" eventType="touchUpInside" id="gAL-3R-6Vn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RqR-pf-44L">
+                                <rect key="frame" x="237" y="617" width="103" height="30"/>
+                                <state key="normal" title="Camera Button"/>
+                                <connections>
+                                    <action selector="pickImageFromCamera:" destination="dvy-ot-TSk" eventType="touchUpInside" id="7B2-Em-dsC"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Puk-PJ-0Tm">
+                                <rect key="frame" x="27" y="128" width="321" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Mcr-LY-Xoq"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96495451720000003" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Puk-PJ-0Tm" firstAttribute="top" secondItem="SOu-nr-fG1" secondAttribute="bottom" constant="64" id="4gu-ma-xB5"/>
+                            <constraint firstItem="gyE-9s-djm" firstAttribute="top" secondItem="W8O-vO-bIK" secondAttribute="bottom" constant="18" id="6VM-Lx-Cde"/>
+                            <constraint firstItem="rKl-ql-Fdb" firstAttribute="top" secondItem="Rc7-Tf-FxC" secondAttribute="bottom" constant="101" id="B8M-db-deG"/>
+                            <constraint firstItem="W8O-vO-bIK" firstAttribute="centerX" secondItem="Puk-PJ-0Tm" secondAttribute="centerX" id="JAX-gB-o7h"/>
+                            <constraint firstItem="Puk-PJ-0Tm" firstAttribute="leading" secondItem="O1g-X7-MeS" secondAttribute="leadingMargin" constant="11" id="Rgf-oK-X77"/>
+                            <constraint firstItem="gyE-9s-djm" firstAttribute="leading" secondItem="O1g-X7-MeS" secondAttribute="leadingMargin" constant="70" id="SAt-Mo-ySQ"/>
+                            <constraint firstItem="RqR-pf-44L" firstAttribute="leading" secondItem="gyE-9s-djm" secondAttribute="trailing" constant="76" id="Sce-FK-l21"/>
+                            <constraint firstItem="Rc7-Tf-FxC" firstAttribute="trailing" secondItem="Puk-PJ-0Tm" secondAttribute="trailing" id="VtC-5b-dEV"/>
+                            <constraint firstItem="rKl-ql-Fdb" firstAttribute="top" secondItem="RqR-pf-44L" secondAttribute="bottom" constant="20" id="YO8-pG-51o"/>
+                            <constraint firstItem="gyE-9s-djm" firstAttribute="baseline" secondItem="RqR-pf-44L" secondAttribute="baseline" id="aFc-cu-OCL"/>
+                            <constraint firstItem="RqR-pf-44L" firstAttribute="leading" secondItem="gyE-9s-djm" secondAttribute="trailing" constant="76" id="d0E-Qt-nAA"/>
+                            <constraint firstItem="RqR-pf-44L" firstAttribute="top" secondItem="W8O-vO-bIK" secondAttribute="bottom" constant="18" id="egB-ZA-DPl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RqR-pf-44L" secondAttribute="trailing" constant="19" id="fbQ-F9-CkS"/>
+                            <constraint firstItem="rKl-ql-Fdb" firstAttribute="top" secondItem="gyE-9s-djm" secondAttribute="bottom" constant="20" id="hKK-hE-5X4"/>
+                            <constraint firstItem="W8O-vO-bIK" firstAttribute="trailing" secondItem="O1g-X7-MeS" secondAttribute="trailingMargin" id="jW7-8U-F4m"/>
+                            <constraint firstItem="Rc7-Tf-FxC" firstAttribute="leading" secondItem="Puk-PJ-0Tm" secondAttribute="leading" id="nQW-lK-BeN"/>
+                            <constraint firstItem="W8O-vO-bIK" firstAttribute="top" secondItem="SOu-nr-fG1" secondAttribute="bottom" constant="35" id="oMQ-mH-pME"/>
+                            <constraint firstItem="W8O-vO-bIK" firstAttribute="leading" secondItem="O1g-X7-MeS" secondAttribute="leadingMargin" id="rmE-il-pdO"/>
+                            <constraint firstItem="rKl-ql-Fdb" firstAttribute="top" secondItem="W8O-vO-bIK" secondAttribute="bottom" constant="68" id="sKw-6X-wc4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vig-iQ-AgA"/>
+                    <connections>
+                        <outlet property="cameraPickButton" destination="RqR-pf-44L" id="2ui-lx-FwC"/>
+                        <outlet property="imagePickButton" destination="gyE-9s-djm" id="uUf-68-Ca2"/>
+                        <outlet property="imageView" destination="W8O-vO-bIK" id="phA-Tp-KW7"/>
+                        <outlet property="lowerText" destination="Rc7-Tf-FxC" id="XhK-0Y-fHR"/>
+                        <outlet property="upperText" destination="Puk-PJ-0Tm" id="KFR-Nk-8jJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4b-FT-7pE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656.79999999999995" y="187.55622188905548"/>
+        </scene>
+    </scenes>
+</document>

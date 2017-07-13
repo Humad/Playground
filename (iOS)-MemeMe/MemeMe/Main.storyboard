@@ -26,7 +26,7 @@
                                 <rect key="frame" x="16" y="72" width="342" height="595"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0V-os-2Va" userLabel="ShowRockPaperScissors">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="119"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="342" height="99"/>
                                         <color key="backgroundColor" red="1" green="0.072057580849999997" blue="0.050179425909999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Rock Paper Scissors Segue Test"/>
                                         <connections>
@@ -34,7 +34,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uY-rl-Lsq">
-                                        <rect key="frame" x="0.0" y="119" width="342" height="119"/>
+                                        <rect key="frame" x="0.0" y="99" width="342" height="99.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.0" green="1" blue="0.031326614119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Modal Experiment"/>
@@ -43,7 +43,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYb-rg-nkE">
-                                        <rect key="frame" x="0.0" y="238" width="342" height="119"/>
+                                        <rect key="frame" x="0.0" y="198.5" width="342" height="99"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Show Color Switcher"/>
                                         <connections>
@@ -51,7 +51,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQ9-if-T19">
-                                        <rect key="frame" x="0.0" y="357" width="342" height="119"/>
+                                        <rect key="frame" x="0.0" y="297.5" width="342" height="99"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.031326614119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show Click Counter"/>
                                         <connections>
@@ -59,12 +59,20 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naK-No-URJ">
-                                        <rect key="frame" x="0.0" y="476" width="342" height="119"/>
+                                        <rect key="frame" x="0.0" y="396.5" width="342" height="99.5"/>
                                         <color key="backgroundColor" red="0.97149466946116725" green="1" blue="0.14903739843564323" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="1" green="0.0099468241871529806" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Show TextFieldTest"/>
                                         <connections>
                                             <action selector="showTextFieldTest:" destination="gyL-qn-pAP" eventType="touchUpInside" id="g9Y-TJ-kPz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbL-kQ-dHc">
+                                        <rect key="frame" x="0.0" y="496" width="342" height="99"/>
+                                        <color key="backgroundColor" red="1" green="0.42345803144300664" blue="0.93196640185056889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Show MemeMeV1"/>
+                                        <connections>
+                                            <action selector="showMemeMeV1:" destination="gyL-qn-pAP" eventType="touchUpInside" id="mfR-fs-DyX"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -43,6 +43,4 @@ class MoneyDelegate: NSObject, UITextFieldDelegate {
             textField.text = "$0.00"
         }
     }
-    
-    
 }
