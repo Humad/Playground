@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShakeDetector</string>
+    <string name="threeDee">The 3D acceleration values are: </string>
+    <string name="shakeDetect">The Shake detector detects: </string>
+</resources>
