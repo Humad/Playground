@@ -1,0 +1,45 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="10dp"
+android:fillViewport="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/assName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Assignment Name" />
+
+        <EditText
+            android:id="@+id/assCompletion"
+            android:layout_width="283dp"
+            android:layout_height="43dp"
+            android:ems="10"
+            android:inputType="number"
+            android:text="Approximate time to complete" />
+
+        <TimePicker
+            android:id="@+id/timePick"
+            android:layout_width="410dp"
+            android:layout_height="wrap_content" />
+
+        <DatePicker
+            android:id="@+id/datePick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="submit"
+            android:onClick="submitAss"/>
+    </LinearLayout>
+</ScrollView>
