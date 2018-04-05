@@ -40,14 +40,7 @@ from django.conf.urls.static import static
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-
-''' urlpatterns += [
-    path('catalog/', include('catalog.urls')),
-]
-
+# Needed for registration
 urlpatterns += [
-    path('', RedirectView.as_view(url='/catalog/')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
- '''
