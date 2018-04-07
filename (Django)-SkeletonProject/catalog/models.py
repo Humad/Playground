@@ -53,6 +53,10 @@ class BookInstance(models.Model):
         if self.due_back and date.today() > self.due_back:
             return True
         return False
+
+    @property
+    def is_borrowed(self):
+        return self.status == 'o'
         
 
     def __str__(self):
