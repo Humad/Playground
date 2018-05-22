@@ -1,0 +1,28 @@
+[
+    {
+      "Name": "Russell Westbrook",
+      "JerseyNumber": 12,
+      "Team": "Team 42"
+    },
+    {
+      "Name": "James Harden",
+      "JerseyNumber": 13,
+      "Team": "Team 34"
+    },
+    {
+      "Name": "Stephen Curry",
+      "JerseyNumber": 14,
+      "Team": "Team 56"
+    },
+    {
+      "Name": "Lebron James",
+      "JerseyNumber": 15,
+      "Team": "Team 97"
+    },
+    {
+      "Name": "Kevin Durant",
+      "JerseyNumber": 16,
+      "Team": "Team 12"
+    }
+  ]
+  
