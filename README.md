@@ -18,53 +18,53 @@ A number of projects from the Udacity Android App Development course.
 These are just beginner projects that I worked on when first creating Android applications.
 
 # C++
-1. Breadth-first Search: 
+1. [Breadth-first Search](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/bfs): 
 A simple BFS implementation using C++.
 
-2. Functional Programming: 
+2. [Functional Programming](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/functional-programming): 
 Experimenting with functional programming for fun.
 
-3. Imagemasks: 
+3. [Imagemasks](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/imagemasks): 
 Working with the CImg library to create different image masks.
 
-4. Malloc: 
+4. [Malloc](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/malloc): 
 Implementing memory allocation.
 
-5. Optimized Fountain: 
+5. [Optimized Fountain](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/optimized-fountain): 
 Simulating a fountain and using compiler optimizations to make it run faster.
 
-6. Rapidly Exploring Random Tree: 
+6. [Rapidly Exploring Random Tree](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/rapidly-exploring-random-tree): 
 Creating RRTs to find a path in a maze.
 
-7. Scheduler: 
+7. [Scheduler](https://github.com/Humad/Project-Playground/tree/master/C%2B%2B/scheduler): 
 Implementing process scheduling algorithms (STCF, Round Robin etc).
 
 # Django
-1. Skeleton: 
+1. [Skeleton](https://github.com/Humad/Project-Playground/tree/master/Django/SkeletonProject): 
 A simple skeleton app for starting a Django application.
 
 # iOS
-1. MemeMe: 
+1. [MemeMe](https://github.com/Humad/Project-Playground/tree/master/iOS/(iOS)-MemeMe): 
 Create memes using images.
 
-2. Pitch Perfect: 
+2. [Pitch Perfect](https://github.com/Humad/Project-Playground/tree/master/iOS/(iOS)-PitchPerfect): 
 Modify properties of a recording to make it sound different.
 
 # Node.js
-1. File Metadata Microservice: 
+1. [File Metadata Microservice](https://github.com/Humad/Project-Playground/tree/master/Nodejs/FileMetaDataMicroservice): 
 Gives information about an uploaded file.
 
-2. Header Parser Microservice: 
+2. [Header Parser Microservice](https://github.com/Humad/Project-Playground/tree/master/Nodejs/HeaderParserMicroservice): 
 Gives information about the user using the HTTP request header.
 
-3. Mongoose Transactions: 
+3. [Mongoose Transactions](https://github.com/Humad/Project-Playground/tree/master/Nodejs/MongooseTransactions): 
 Basic Get/Insert/Update/Delete operations using Mongoose.
 
-4. Passport Vault: 
+4. [Passport Vault](https://github.com/Humad/Project-Playground/tree/master/Nodejs/PassportVault): 
 Authenticating users using Passport.
 
-5. Timestamp Microservice: 
+5. [Timestamp Microservice](https://github.com/Humad/Project-Playground/tree/master/Nodejs/TimestampMicroservice): 
 Simple date/time conversion.
 
-6. URL Shortener: 
+6. [URL Shortener](https://github.com/Humad/Project-Playground/tree/master/Nodejs/URLShortener): 
 A URL shortening service using MongoDB.
