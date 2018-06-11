@@ -32,10 +32,10 @@ mongoose.connect(process.env.MONGODB_URI);
 // Keep Heroku app alive
 const http = require("http");
 setInterval(function() {
-    http.get("http://motivate-bot.herokuapp.com/");
+    http.get("https://lootboxcoinpricechecker.herokuapp.com/");
 }, 300000); // 5 Minutes 
 
-setInterval(() => {getCoinPrice(true, () => {})}, 1800000);
+setInterval(() => {getCoinPrice(true, (price, data) => {})}, 1800000);
 
 function getCoinPrice(shouldSave, callback) {
     console.log("Getting coin price at ", (new Date()).toDateString());
@@ -58,12 +58,14 @@ function getCoinPrice(shouldSave, callback) {
                     callback(globalPrice, data);
                 }
             });
+        } else {
+            console.log("Error: ", err);
         }
     });
 }
 
 function saveCoinPrice(price) {
-    console.log("Saving coin price at ", (new Date()).toDateString());
+    console.log("Saving coin price at ", (new Date()).toUTCString());
     var newCoinPrice = new CoinPrice();
     newCoinPrice.time = new Date();
     newCoinPrice.price = price;
