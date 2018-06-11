@@ -1,0 +1,42 @@
+<h1>LootBoxCoin Value Checker.</h1>
+<h2>The current value of LootBoxCoin is: {{coinValue}}</h2>
+
+<div id="trends-graph"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    // Load google charts
+    $(document).ready(function() {
+
+        var retrievedData = [["DateTime", "Price"]];
+
+        function getData (){
+            $.ajax({
+                type: 'GET',
+                url: window.location.href + "trends",
+                success: function(trends) {
+                    for (var i = 0; i < trends.length; i++) {
+                        retrievedData.push([(new Date(trends[i].time)).toDateString(), Number.parseFloat(trends[i].price)]);
+                    }
+                    console.log(retrievedData);
+                    drawChart();
+                }
+            });
+        }
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(getData);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(retrievedData);
+
+            var options = {'title':'Trends', 'width':400, 'height':300};
+
+            var chart = new google.visualization.LineChart(document.getElementById('trends-graph'));
+            chart.draw(data, options);
+        }
+    });
+</script>
