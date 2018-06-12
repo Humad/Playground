@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGODB_URI);
 // Keep Heroku app alive
 const http = require("http");
 setInterval(function() {
-    http.get("https://lootboxcoinpricechecker.herokuapp.com/");
+    http.get("http://lootboxcoinpricechecker.herokuapp.com/");
 }, 300000); // 5 Minutes 
 
 setInterval(() => {getCoinPrice(true, (price, data) => {})}, 1800000);
@@ -47,7 +47,7 @@ function getCoinPrice(shouldSave, callback) {
             const splitText = retrievedText.split(' ');
             const globalPrice = splitText[splitText.length - 1];   
 
-            if (shouldSave) {
+            if (shouldSave && globalPrice) {
                 saveCoinPrice(globalPrice.substring(1));
             }
 
