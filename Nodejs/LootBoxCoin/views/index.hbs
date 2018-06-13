@@ -18,7 +18,7 @@
                 url: window.location.href + "trends",
                 success: function(trends) {
                     for (var i = 0; i < trends.length; i++) {
-                        retrievedData.push([(new Date(trends[i].time)).toDateString(), Number.parseFloat(trends[i].price)]);
+                        retrievedData.push([(new Date(trends[i].time)).toUTCString().substring(5), Number.parseFloat(trends[i].price)]);
                     }
                     console.log(retrievedData);
                     drawChart();
@@ -33,7 +33,7 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable(retrievedData);
 
-            var options = {'title':'Trends', 'width':400, 'height':300};
+            var options = {'title': 'Trends', 'height': 500};
 
             var chart = new google.visualization.LineChart(document.getElementById('trends-graph'));
             chart.draw(data, options);
