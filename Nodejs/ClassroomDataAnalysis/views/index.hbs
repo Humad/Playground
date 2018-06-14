@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Daily Interactions</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1>Daily Interactions</h1>
+
+        <h2>Average wait time: {{averageWaitTime}}</h2>
+        <h2>Average help time: {{averageHelpTime}}</h2>
+
+        <table class="table">
+            <tr>
+                <th>Student Name</th>
+                <th>Time Entered Queue</th>
+                <th>Time Cancelled</th>
+                <th>TA</th>
+                <th>Time Received Help</th>
+                <th>Time Completed</th>
+                <th>Wait Time</th>
+                <th>Help Time</th>
+            </tr>
+
+            {{#each data}}
+                <tr>
+                    <td>
+                        <a href="/student/{{this.student}}">{{this.student}}</a>
+                    </td>
+                    <td>
+                        {{this.timeEnteredQueue}}
+                    </td>
+                    <td>
+                        {{this.timeCancelled}}
+                    </td>
+                    <td>
+                        <a href="/ta/{{this.ta}}">{{this.ta}}</a>
+                    </td>
+                    <td>
+                        {{this.timeReceivedHelp}}
+                    </td>
+                    <td>
+                        {{this.timeCompleted}}
+                    </td>
+                    <td>
+                        {{this.waitTime}}
+                    </td>
+                    <td>
+                        {{this.helpTime}}
+                    </td>
+                </tr>
+            {{/each}}
+
+        </table>
+    </body>
+
+</html>
+

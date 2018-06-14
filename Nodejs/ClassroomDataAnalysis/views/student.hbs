@@ -1,0 +1,23 @@
+<html>
+
+    <head>
+        <title>{{data.studentName}}</title>
+    </head>
+
+    <body>
+        <h1>{{data.studentName}}</h3>
+        <h2>Daily data</h4>
+        <h4><strong>Times asked for help: </strong>{{data.numHelp}}</h4>
+        <h4><strong>Average wait time: </strong>{{data.avgWaitTime}}</h4>
+        <h4><strong>Average help time: </strong>{{data.avgHelpTime}}</h4>
+        <h4>
+            <strong>Worked with: </strong>
+            {{#each data.workedWith}}
+                <p><a href="/ta/{{this}}">{{this}}</a></p>
+            {{/each}}
+        </h4>
+    </body>
+
+
+
+</html>
