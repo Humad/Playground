@@ -6,29 +6,42 @@
 // - wait_time
 // - help_time
 
+// SQL Query to get data for today: SELECT * FROM events WHERE ts >= '2018-06-13' ORDER BY ts ASC;
+
+// TODO: Use Map instead of for loops to look for past entries
+// TODO: Instead of having multiple entries, just append to original
+// TODO: Remove additional data-gathering function (should be easy if above TODOs are completed)
+
 const fs = require('fs');
 const data = require('./sample_data.json');
-const refactored_data = [];
+const refactoredData = [];
+const studentMap = {};
+const taMap = {};
 
 // Adds basic student data to the refactored data array
 function addStudent(eventData) {
-    refactored_data.push({
+    refactoredData.push({
         student: eventData.student,
-        time_entered_queue: eventData.ts
+        timeEnteredQueue: eventData.ts
     });
 }
 
 // Updates information in refactored data array by adding TA information
 function addTA(eventData) {
-    for (var i = refactored_data.length - 1; i >= 0; i--) {
-        var currentData = refactored_data[i];
+
+    // Find data ("row") for assigned student
+    for (var i = refactoredData.length - 1; i >= 0; i--) {
+        var currentData = refactoredData[i];
+        // If found, update "row" and break
         if (currentData.student === eventData.student) {
             currentData.ta = eventData.ta;
-            currentData.time_received_help = eventData.ts;
+            currentData.timeReceivedHelp = eventData.ts;
+            
             // Update wait time
-            var waitTime = Date.parse(currentData.time_received_help) - Date.parse(currentData.time_entered_queue);
+            var waitTime = Date.parse(currentData.timeReceivedHelp) - Date.parse(currentData.timeEnteredQueue);
             var waitTimeInMinutes = waitTime / 60000;
-            currentData.wait_time = waitTimeInMinutes;
+            currentData.waitTime = waitTimeInMinutes;
+
             break;
         }
     }
@@ -36,10 +49,13 @@ function addTA(eventData) {
 
 // Updates information in refactored data array by updating student cancel time
 function cancelStudent(eventData) {
-    for (var i = refactored_data.length - 1; i >= 0; i--) {
-        var currentData = refactored_data[i];
+
+    // Find data ("row") for assigned student
+    for (var i = refactoredData.length - 1; i >= 0; i--) {
+        var currentData = refactoredData[i];
+        // If found, update "row" and break
         if (currentData.student === eventData.student) {
-            currentData.time_cancelled = eventData.ts;
+            currentData.timeCancelled = eventData.ts;
             break;
         }
     }
@@ -47,38 +63,73 @@ function cancelStudent(eventData) {
 
 // Updates information in refactored data array by updating student help time
 function completeHelp(eventData) {
-    for (var i = refactored_data.length - 1; i >= 0; i--) {
-        var currentData = refactored_data[i];
+
+    // Find data ("row") for assigned TA
+    for (var i = refactoredData.length - 1; i >= 0; i--) {
+        var currentData = refactoredData[i];
+        // If found, update "row" and break
         if (currentData.ta === eventData.ta) {
-            currentData.time_completed = eventData.ts;
-            // update help time
-            var helpTime = Date.parse(currentData.time_completed) - Date.parse(currentData.time_received_help);
+            currentData.timeCompleted = eventData.ts;
+
+            // Update help time
+            var helpTime = Date.parse(currentData.timeCompleted) - Date.parse(currentData.timeReceivedHelp);
             var helpTimeInMinutes = helpTime / 60000;
-            currentData.help_time = helpTimeInMinutes;
+            currentData.helpTime = helpTimeInMinutes;
             break;
         }
     }
 }
 
+// Reduces multiple rows for the same student into one
 function gatherStudentInformation() {
-    var studentMap = new Map();
-    refactored_data.forEach(function(data) {
-        if (!studentMap.has(data.student)) {
-            studentMap.set(data.student, {
+
+    refactoredData.forEach(function(data) {
+        if (!studentMap[data.student]) {
+            studentMap[data.student] = {
+                studentName: data.student,
                 numHelp: 0,
                 avgWaitTime: 0,
                 avgHelpTime: 0,
                 workedWith: []
-            });
-        };
+            };
+        }
 
-        studentMap.set(studentMap.get)
+        var studentData = studentMap[data.student];
+        if (data.waitTime && data.helpTime) {
+            studentData.avgWaitTime = (studentData.avgWaitTime * studentData.numHelp + data.waitTime) / (studentData.numHelp + 1);
+            studentData.avgHelpTime = (studentData.avgHelpTime * studentData.numHelp + data.helpTime) / (studentData.numHelp + 1);
+            studentData.numHelp = studentData.numHelp + 1;
+        }
 
-
-
-
+        if (data.ta && studentData.workedWith.indexOf(data.ta) === -1) {
+            studentData.workedWith.push(data.ta);
+        }
     });
+}
 
+function gatherTAInformation() {
+    refactoredData.forEach(function(data) {
+        if (data.ta) {
+            if (!taMap[data.ta]) {
+                taMap[data.ta] = {
+                    taName: data.ta,
+                    studentsHelped: 0,
+                    avgTimePerStudent: 0,
+                    workedWith: []
+                };
+            }
+    
+            var taData = taMap[data.ta];
+            if (data.helpTime) {
+                taData.avgTimePerStudent = (taData.avgTimePerStudent * taData.studentsHelped + data.helpTime) / (taData.numHelp + 1);
+                taData.numHelp = taData.numHelp + 1;
+            }
+    
+            if (taData.workedWith.indexOf(data.student) === -1) {
+                taData.workedWith.push(data.student);
+            }
+        }
+    });
 }
 
 // Reads through JSON data and refactors it with relevant information
@@ -102,7 +153,11 @@ function main() {
         }
     }
 
-    fs.writeFile('refactored_data.json', JSON.stringify(refactored_data), 'utf8', function(error, data) {});
+    gatherStudentInformation();
+    gatherTAInformation();
+
+    fs.writeFile('student_information.json', JSON.stringify(studentMap), 'utf8', function(error, data) {});
+    fs.writeFile('ta_information.json', JSON.stringify(taMap), 'utf8', function(error, data){});
 }
 
 main();
