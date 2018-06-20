@@ -6,14 +6,9 @@
 // - wait_time
 // - help_time
 
-// SQL Query to get data for today: SELECT * FROM events WHERE ts >= '2018-06-13' ORDER BY ts ASC;
-
-// TODO: Use Map instead of for loops to look for past entries
-// TODO: Instead of having multiple entries, just append to original
-// TODO: Remove additional data-gathering function (should be easy if above TODOs are completed)
+// SQL Query to get data for today: SELECT * FROM events WHERE ts >= '2018-06-13' AND ts < '2018-06-14' ORDER BY ts ASC;
 
 const fs = require('fs');
-const data = require('./sample_data.json');
 const refactoredData = [];
 const studentMap = {};
 const taMap = {};
@@ -33,14 +28,16 @@ function addTA(eventData) {
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
         // If found, update "row" and break
-        if (currentData.student === eventData.student) {
+        // If found student, not cleared, not cancelled
+        if (currentData.student === eventData.student && !currentData.timeCleared && !currentData.timeCancelled) {
             currentData.ta = eventData.ta;
             currentData.timeReceivedHelp = eventData.ts;
             
             // Update wait time
             var waitTime = Date.parse(currentData.timeReceivedHelp) - Date.parse(currentData.timeEnteredQueue);
             var waitTimeInMinutes = waitTime / 60000;
-            currentData.waitTime = waitTimeInMinutes;
+            waitTimeInMinutes = waitTimeInMinutes > 40 ? 40 : waitTimeInMinutes;
+            currentData.waitTime = Math.floor(waitTimeInMinutes * 100) / 100;
 
             break;
         }
@@ -54,7 +51,7 @@ function cancelStudent(eventData) {
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
         // If found, update "row" and break
-        if (currentData.student === eventData.student) {
+        if (currentData.student === eventData.student && !currentData.timeCleared && !currentData.ta) {
             currentData.timeCancelled = eventData.ts;
             break;
         }
@@ -68,13 +65,36 @@ function completeHelp(eventData) {
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
         // If found, update "row" and break
-        if (currentData.ta === eventData.ta) {
+        if (currentData.ta === eventData.ta && !currentData.timeCleared) {
             currentData.timeCompleted = eventData.ts;
 
             // Update help time
             var helpTime = Date.parse(currentData.timeCompleted) - Date.parse(currentData.timeReceivedHelp);
             var helpTimeInMinutes = helpTime / 60000;
-            currentData.helpTime = helpTimeInMinutes;
+            helpTimeInMinutes = helpTimeInMinutes > 40 ? 40 : helpTimeInMinutes;
+            currentData.helpTime = Math.floor(helpTimeInMinutes * 100) / 100;
+            break;
+        }
+    }
+}
+
+function clearQueue(eventData) {
+    // Find data ("row") for assigned student
+    for (var i = refactoredData.length - 1; i >= 0; i--) {
+        var currentData = refactoredData[i];
+        // If found, update "row" and break
+        if (!currentData.ta && !currentData.timeCancelled) {
+            currentData.timeCleared = eventData.ts;
+        }
+    }
+}
+
+function removeStudent(eventData) {
+    for (var i = refactoredData.length - 1; i >= 0; i--) {
+        var currentData = refactoredData[i];
+        
+        if (currentData.student === eventData.student && !currentData.timeCleared && !currentData.ta) {
+            currentData.timeCleared = eventData.ts;
             break;
         }
     }
@@ -96,8 +116,8 @@ function gatherStudentInformation() {
 
         var studentData = studentMap[data.student];
         if (data.waitTime && data.helpTime) {
-            studentData.avgWaitTime = (studentData.avgWaitTime * studentData.numHelp + data.waitTime) / (studentData.numHelp + 1);
-            studentData.avgHelpTime = (studentData.avgHelpTime * studentData.numHelp + data.helpTime) / (studentData.numHelp + 1);
+            studentData.avgWaitTime = Math.floor(((studentData.avgWaitTime * studentData.numHelp + data.waitTime) / (studentData.numHelp + 1)) * 100) / 100;
+            studentData.avgHelpTime = Math.floor(((studentData.avgHelpTime * studentData.numHelp + data.helpTime) / (studentData.numHelp + 1)) * 100) / 100;
             studentData.numHelp = studentData.numHelp + 1;
         }
 
@@ -121,7 +141,7 @@ function gatherTAInformation() {
     
             var taData = taMap[data.ta];
             if (data.helpTime) {
-                taData.avgTimePerStudent = (taData.avgTimePerStudent * taData.studentsHelped + data.helpTime) / (taData.studentsHelped + 1);
+                taData.avgTimePerStudent = Math.floor(((taData.avgTimePerStudent * taData.studentsHelped + data.helpTime) / (taData.studentsHelped + 1)) * 100) / 100;
                 taData.studentsHelped = taData.studentsHelped + 1;
             }
     
@@ -132,8 +152,30 @@ function gatherTAInformation() {
     });
 }
 
+function getAverageWaitTime() {
+    var totalTime = 0;
+    for (var i in studentMap) {
+        totalTime += studentMap[i].avgWaitTime;
+    }
+    return Math.floor(totalTime / Object.keys(studentMap).length * 100) / 100;
+}
+
+function getAverageHelpTime() {
+    var totalTime = 0;
+    for (var i in studentMap) {
+        totalTime += studentMap[i].avgHelpTime;
+    }
+    return Math.floor(totalTime / Object.keys(studentMap).length * 100) / 100;
+}
+
+function writeDataToFile() {
+    fs.writeFile('./parsed_data/interactionData.json', JSON.stringify(refactoredData, null, 4), 'utf8', function(error, data) {});
+    fs.writeFile('./parsed_data/studentData.json', JSON.stringify(studentMap, null, 4), 'utf8', function(error, data) {});
+    fs.writeFile('./parsed_data/taData.json', JSON.stringify(taMap, null, 4), 'utf8', function(error, data){});
+}
+
 // Reads through JSON data and refactors it with relevant information
-function main() {
+function main(data) {
     for (var i = 0; i < data.length; i++) {
 
         switch (data[i].type) {
@@ -150,42 +192,24 @@ function main() {
             case "doneoff":
                 completeHelp(data[i]);
                 break;
+            case "clear":
+                clearQueue(data[i]);
+            case "remove":
+                removeStudent(data[i]);
         }
     }
 
     gatherStudentInformation();
     gatherTAInformation();
-    getAverageWaitTime();
 
-    fs.writeFile('interaction_data.json', JSON.stringify(refactoredData), 'utf8', function(error, data) {});
-    fs.writeFile('student_data.json', JSON.stringify(studentMap), 'utf8', function(error, data) {});
-    fs.writeFile('ta_data.json', JSON.stringify(taMap), 'utf8', function(error, data){});
-}
-
-function getAverageWaitTime() {
-    var totalTime = 0;
-    for (var i in studentMap) {
-        totalTime += studentMap[i].avgWaitTime;
+    return {
+        refactoredData: refactoredData,
+        studentMap: studentMap,
+        taMap: taMap,
+        averageWaitTime: getAverageWaitTime(),
+        averageHelpTime: getAverageHelpTime(),
+        writeDataToFile: writeDataToFile
     }
-    return totalTime / Object.keys(studentMap).length;
 }
 
-function getAverageHelpTime() {
-    var totalTime = 0;
-    for (var i in studentMap) {
-        totalTime += studentMap[i].avgHelpTime;
-    }
-    return totalTime / Object.keys(studentMap).length;
-}
-
-main();
-
-module.exports = {
-    refactoredData: refactoredData,
-    studentMap: studentMap,
-    taMap: taMap,
-    averageWaitTime: getAverageWaitTime(),
-    averageHelpTime: getAverageHelpTime()
-}
-
-
+module.exports = main;

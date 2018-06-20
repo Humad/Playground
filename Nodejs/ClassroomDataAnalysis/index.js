@@ -21,29 +21,30 @@ setInterval(function() {
 
 // ---- //
 
-const dataAnalysis = require('./dataAnalysis');
-const refactoredData = dataAnalysis.refactoredData;
-const studentMap = dataAnalysis.studentMap;
-const taMap = dataAnalysis.taMap;
-const averageWaitTime = dataAnalysis.averageWaitTime;
-const averageHelpTime = dataAnalysis.averageHelpTime;
+const analyzedData = require('./dataAnalysis')(require('./raw_data/every_day/6-18.json'));
 
 app.get('/', function(req, res) {
     res.render('index', {
-        data: refactoredData,
-        averageWaitTime: averageWaitTime,
-        averageHelpTime: averageHelpTime
+        today: '6/18',
+        data: analyzedData.refactoredData,
+        averageWaitTime: analyzedData.averageWaitTime,
+        averageHelpTime: analyzedData.averageHelpTime
     });
 });
 
 app.get('/student/:studentName', function(req, res) {
     res.render('student', {
-        data: studentMap[req.params.studentName]
+        data: analyzedData.studentMap[req.params.studentName]
     });
 });
 
 app.get('/ta/:taName', function(req, res) {
     res.render('ta', {
-        data: taMap[req.params.taName]
+        data: analyzedData.taMap[req.params.taName]
     });
+});
+
+app.get('/writeToFile', function(req, res) {
+    analyzedData.writeDataToFile();
+    res.redirect('/');
 });
