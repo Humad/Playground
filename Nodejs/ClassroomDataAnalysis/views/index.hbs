@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title>Daily Interactions</title>
@@ -6,8 +7,8 @@
     <body>
         <h1>Daily Interactions for {{today}}</h1>
 
-        <h2>Average wait time: {{averageWaitTime}}</h2>
-        <h2>Average help time: {{averageHelpTime}}</h2>
+        <h2>Average wait time: {{averageWaitTime}} minutes</h2>
+        <h2>Average help time: {{averageHelpTime}} minutes</h2>
 
         <table class="table">
             <tr>
@@ -42,15 +43,26 @@
                         {{this.timeCompleted}}
                     </td>
                     <td>
-                        {{this.waitTime}}
+                        {{#if this.waitTime}}
+                            {{this.waitTime}} mins
+                        {{else}}
+                            -
+                        {{/if}}
                     </td>
                     <td>
-                        {{this.helpTime}}
+                        {{#if this.helpTime}}
+                            {{this.helpTime}} mins
+                        {{else}}
+                            -
+                        {{/if}}
                     </td>
                 </tr>
             {{/each}}
 
         </table>
+
+        <script>
+        </script>
     </body>
 
 </html>
