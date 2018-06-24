@@ -9,16 +9,11 @@
 // SQL Query to get data for today: SELECT * FROM events WHERE ts >= '2018-06-19 16:00:00' AND ts <= '2018-06-20 05:00:00' ORDER BY ts ASC;
 
 const fs = require('fs');
-const refactoredData = [];
-const studentMap = {};
-const taMap = {};
 const realNames = JSON.parse(JSON.stringify(require('./raw_data/realNames.js')));
 const moment = require('moment-timezone');
 
-console.log(moment("2018-06-21T23:58:26.225Z").tz("America/Los_Angeles").format());
-
 // Adds basic student data to the refactored data array
-function addStudent(eventData) {
+function addStudent(eventData, refactoredData) {
     refactoredData.push({
         student: eventData.student,
         timeEnteredQueue: eventData.ts
@@ -26,7 +21,7 @@ function addStudent(eventData) {
 }
 
 // Updates information in refactored data array by adding TA information
-function addTA(eventData) {
+function addTA(eventData, refactoredData) {
 
     // Find data ("row") for assigned student
     for (var i = refactoredData.length - 1; i >= 0; i--) {
@@ -49,7 +44,7 @@ function addTA(eventData) {
 }
 
 // Updates information in refactored data array by updating student cancel time
-function cancelStudent(eventData) {
+function cancelStudent(eventData, refactoredData) {
 
     // Find data ("row") for assigned student
     for (var i = refactoredData.length - 1; i >= 0; i--) {
@@ -63,7 +58,8 @@ function cancelStudent(eventData) {
 }
 
 // Updates information in refactored data array by updating student help time
-function completeHelp(eventData) {
+function completeHelp(eventData, refactoredData) {
+
     // Find data ("row") for assigned TA
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
@@ -81,7 +77,8 @@ function completeHelp(eventData) {
     }
 }
 
-function clearQueue(eventData) {
+function clearQueue(eventData, refactoredData) {
+
     // Find data ("row") for assigned student
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
@@ -92,7 +89,8 @@ function clearQueue(eventData) {
     }
 }
 
-function removeStudent(eventData) {
+function removeStudent(eventData, refactoredData) {
+
     for (var i = refactoredData.length - 1; i >= 0; i--) {
         var currentData = refactoredData[i];
         
@@ -104,7 +102,7 @@ function removeStudent(eventData) {
 }
 
 // Reduces multiple rows for the same student into one
-function gatherStudentInformation() {
+function gatherStudentInformation(studentMap, refactoredData) {
 
     refactoredData.forEach(function(data) {
         if (!studentMap[data.student]) {
@@ -130,8 +128,10 @@ function gatherStudentInformation() {
     });
 }
 
-function gatherTAInformation() {
+function gatherTAInformation(taMap, refactoredData) {
+
     refactoredData.forEach(function(data) {
+
         if (data.ta) {
             if (!taMap[data.ta]) {
                 taMap[data.ta] = {
@@ -155,7 +155,7 @@ function gatherTAInformation() {
     });
 }
 
-function getAverageWaitTime() {
+function getAverageWaitTime(studentMap) {
     var totalTime = 0;
     for (var i in studentMap) {
         totalTime += studentMap[i].avgWaitTime;
@@ -163,7 +163,7 @@ function getAverageWaitTime() {
     return Math.floor(totalTime / Object.keys(studentMap).length * 100) / 100;
 }
 
-function getAverageHelpTime() {
+function getAverageHelpTime(studentMap) {
     var totalTime = 0;
     for (var i in studentMap) {
         totalTime += studentMap[i].avgHelpTime;
@@ -184,7 +184,7 @@ function getFormattedTime(dateTime) {
     return date + " " + time;
 }
 
-function cleanData() {
+function cleanData(refactoredData) {
     for (var i = 0; i < refactoredData.length; i++) {
         if (refactoredData[i].ta) {
             refactoredData[i].ta = realNames[refactoredData[i].ta] ? realNames[refactoredData[i].ta] : refactoredData[i].ta;
@@ -218,40 +218,46 @@ function cleanData() {
 
 // Reads through JSON data and refactors it with relevant information
 function main(data) {
+
+    let refactoredData = [];
+
     for (var i = 0; i < data.length; i++) {
 
         switch (data[i].type) {
             case "enter queue":
-                addStudent(data[i]);
+                addStudent(data[i], refactoredData);
                 break;
             case "assigned":
-                addTA(data[i]);
+                addTA(data[i], refactoredData);
                 break;
             case "cancel":
-                cancelStudent(data[i]);
+                cancelStudent(data[i], refactoredData);
                 break;
             case "done":
             case "doneoff":
-                completeHelp(data[i]);
+                completeHelp(data[i], refactoredData);
                 break;
             case "clear":
-                clearQueue(data[i]);
+                clearQueue(data[i], refactoredData);
             case "remove":
-                removeStudent(data[i]);
+                removeStudent(data[i], refactoredData);
         }
     }
 
-    cleanData();
+    let taMap = {};
+    let studentMap = {};
 
-    gatherStudentInformation();
-    gatherTAInformation();
+    cleanData(refactoredData);
+
+    gatherStudentInformation(studentMap, refactoredData);
+    gatherTAInformation(taMap, refactoredData);
 
     return {
         refactoredData: refactoredData,
         studentMap: studentMap,
         taMap: taMap,
-        averageWaitTime: getAverageWaitTime(),
-        averageHelpTime: getAverageHelpTime(),
+        averageWaitTime: getAverageWaitTime(studentMap),
+        averageHelpTime: getAverageHelpTime(studentMap),
         writeDataToFile: writeDataToFile
     }
 }

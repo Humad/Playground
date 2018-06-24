@@ -50,8 +50,10 @@ function getDailyData() {
 function getDataForDay(dayString) {
 
     return new Promise(function(resolve, reject) {
-        let tomorrowString = moment(dayString).add(1, 'days').tz('America/Los_Angeles').format('YYYY-MM-DD');
+        let tomorrowString = moment(dayString).add(1, 'days').format('YYYY-MM-DD');
         let queryString = "SELECT * FROM events WHERE ts >= '" + dayString + " 16:00:00' AND ts <= '" + tomorrowString  + " 05:00:00' ORDER BY ts ASC";
+
+        console.log(dayString + ", " + tomorrowString);
 
         if (dataForDays.hasOwnProperty(dayString)) {
             // If already have data for given day, no need to process again
@@ -69,7 +71,6 @@ function getDataForDay(dayString) {
             });
         }
     });
-    
 }
 
 function getDataForAllDays() {
@@ -86,17 +87,19 @@ function getDataForAllDays() {
         Promise.all(allPromises).then(function(data) {
             resolve(data);
         });
+
+
     });
 }
 
 // Helper functions
 function getDate(offset) {
-    return moment().add(offset, 'days').tz("America/Los_Angeles").format('YYYY-MM-DD');
+    return moment().add(offset, 'days').format('YYYY-MM-DD');
 }
 
 function getPastDays() {
     let today = moment().tz('America/Los_Angeles');
-    let pastDay = moment('2018-05-29').tz('America/Los_Angeles'); // First day of summer classes
+    let pastDay = moment('2018-05-29'); // First day of summer classes
 
     let allDays = [];
 

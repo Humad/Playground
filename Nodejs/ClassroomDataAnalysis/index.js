@@ -90,6 +90,7 @@ app.get('/days', function(req, res) {
             res.send(err);
         })
     } else {
+        console.log("Getting data for all days");
         poolParty.getDataForAllDays()
         .then(function(data) {
             res.render('allDays', {
