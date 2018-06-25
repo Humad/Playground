@@ -1,0 +1,11 @@
+id,html_tag_hash_id,redirect_loop,redirect_count,experiment_id,meta_rank,req_ssl,req_port,response_status,meta_nickname_id,meta_protocol_id,req_header_id,response_header,req_path_id,url_id,response_reason_id,meta_http_id,full_url_id,req_host_id,response_failure_id,response_body_id,meta_old_http_id
+1,2,f,0,2,-1,f,17613,-1,1,1,2,,1,16370,,1,16370,10,2,,1
+2,1,f,0,4,-1,f,17613,-1,1,1,1,,1,16370,,1,16370,10,1,,1
+3,1,f,0,3,-1,f,17613,-1,1,1,3,,1,16370,,1,16370,10,3,,1
+4,3,f,0,1,-1,f,17613,-1,1,1,2,,1,16370,,1,16370,10,2,,1
+5,1,f,0,2,-1,f,26919,-1,5,1,2,,1,16371,,1,16371,9,3,,1
+6,1,f,0,3,-1,f,26919,-1,5,1,3,,1,16371,,1,16371,9,5,,1
+7,1,f,0,4,-1,f,26919,-1,5,1,1,,1,16371,,1,16371,9,2,,1
+8,1,f,0,1,-1,f,26919,-1,5,1,2,,1,16371,,1,16371,9,6,,1
+9,1,f,0,5,-1,f,17613,-1,1,1,4,,1,16370,,1,16370,10,2,,1
+10,1,f,0,4,-1,f,22,-1,7,5,1,,1,16372,,1,16372,6,6,,1

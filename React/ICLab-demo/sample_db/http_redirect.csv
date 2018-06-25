@@ -1,0 +1,116 @@
+id,html_tag_hash_id,redirect_num,http_id,req_ssl,req_port,response_status,response_header,req_host_id,req_path_id,response_reason_id,req_header_id,full_url_id,response_failure_id,response_body_id
+1,4,0,824,f,80,200,"Content-Length : 80
+X-HW : 1485608506.dop013.at1.t,1485608506.cds009.at1.c
+Accept-Ranges : bytes
+Keep-Alive : timeout=10, max=100
+Last-Modified : Sat, 28 Jan 2017 11:36:57 GMT
+Connection : Keep-Alive
+ETag : ""1485603417""
+Location : http://www.who.int/influenza/human_animal_interface/
+Cache-Control : max-age=5711
+Date : Sat, 28 Jan 2017 13:01:46 GMT
+x-pb-mii : Powered by DDN Mirror Image Internet
+Content-Type : text/html
+",91,5,1,5,16548,,1
+2,8,1,1474,f,80,403,"Date : Sat, 28 Jan 2017 12:59:36 GMT
+Transfer-Encoding : chunked
+Accept-Ranges : bytes
+Content-Type : text/html
+Server : Apache
+",647,22,3,,16881,,5
+3,9,0,1474,f,80,200,"Content-Length : 111
+Accept-Ranges : bytes
+Server : Apache
+Last-Modified : Thu, 22 Sep 2016 22:42:26 GMT
+Date : Sat, 28 Jan 2017 12:59:30 GMT
+Content-Type : text/html
+",647,1,2,5,16880,,6
+4,15,1,1590,f,80,500,"Content-Length : 689
+X-Powered-By : Perl
+Server : Apache/2
+Connection : keep-alive
+Date : Thu, 05 Jan 2017 01:44:31 GMT
+Content-Type : text/html; charset=iso-8859-1
+",1438,26,5,,16926,,13
+5,15,0,1590,f,80,500,"Content-Length : 689
+X-Powered-By : Perl
+Server : Apache/2
+Connection : keep-alive
+Location : http://www.unitedworldinternational.org/cgi-sys/suspendedpage.cgi
+Date : Thu, 05 Jan 2017 01:44:29 GMT
+Content-Type : text/html; charset=iso-8859-1
+",1438,27,6,5,16925,,13
+6,21,1,1650,t,443,200,"X-XSS-Protection : 1; mode=block
+X-Content-Type-Options : nosniff
+Transfer-Encoding : chunked
+Set-Cookie : Secure
+Strict-Transport-Security : max-age=631138519
+Vary : Accept-Encoding
+Server : cloudflare-nginx
+Content-Security-Policy-Report-Only : default-src *.cpj.org cpj.org; script-src 'self' 'unsafe-eval' https://ws.sharethis.com wd-edge.sharethis.com www.google-analytics.com 'unsafe-inline' https://www.youtube.com https://gdata.youtube.com https://s.ytimg.com script.crazyegg.com cse.google.com www.google.com www.googleapis.com platform.twitter.com; style-src *.cpj.org cpj.org 'unsafe-inline' w.sharethis.com ws.sharethis.com cse.google.com www.google.com; frame-src *.cpj.org cpj.org content.newsbound.com player.vimeo.com https://www.kizoa.com https://player.vimeo.com seg.sharethis.com edge.sharethis.com  https://ws.sharethis.com https://www.youtube.com https://www.google.com https://w.soundcloud.com; connect-src *.cpj.org cpj.org vimeo.com https://vimeo.com; img-src https://cpj.org https://www.cpj.org *.cpj.org cpj.org i.vimeocdn.com https://i.ytimg.com https://wa2.www.unesco.org www.google-analytics.com https://api.pagepeeker.com http://free.pagepeeker.com l.sharethis.com i.creativecommons.org licensebuttons.net www.googleapis.com www.google.com clients1.google.com encrypted-tbn0.gstatic.com encrypted-tbn1.gstatic.com encrypted-tbn2.gstatic.com encrypted-tbn3.gstatic.com 'unsafe-inline'; object-src *.cpj.org cpj.org http://cpj.org; report-uri https://cpj.org/cgi-bin/csp-collector.cgi
+Connection : keep-alive
+Date : Thu, 05 Jan 2017 06:34:33 GMT
+X-Frame-Options : SAMEORIGIN
+Content-Type : text/html
+CF-RAY : 31c4e7ad7fb028de-DXB
+",4077,38,2,,16980,,28
+7,21,0,1650,f,80,200,"X-XSS-Protection : 1; mode=block
+X-Content-Type-Options : nosniff
+Transfer-Encoding : chunked
+Set-Cookie : Secure
+Strict-Transport-Security : max-age=631138519
+Vary : Accept-Encoding
+Server : cloudflare-nginx
+Content-Security-Policy-Report-Only : default-src *.cpj.org cpj.org; script-src 'self' 'unsafe-eval' https://ws.sharethis.com wd-edge.sharethis.com www.google-analytics.com 'unsafe-inline' https://www.youtube.com https://gdata.youtube.com https://s.ytimg.com script.crazyegg.com cse.google.com www.google.com www.googleapis.com platform.twitter.com; style-src *.cpj.org cpj.org 'unsafe-inline' w.sharethis.com ws.sharethis.com cse.google.com www.google.com; frame-src *.cpj.org cpj.org content.newsbound.com player.vimeo.com https://www.kizoa.com https://player.vimeo.com seg.sharethis.com edge.sharethis.com  https://ws.sharethis.com https://www.youtube.com https://www.google.com https://w.soundcloud.com; connect-src *.cpj.org cpj.org vimeo.com https://vimeo.com; img-src https://cpj.org https://www.cpj.org *.cpj.org cpj.org i.vimeocdn.com https://i.ytimg.com https://wa2.www.unesco.org www.google-analytics.com https://api.pagepeeker.com http://free.pagepeeker.com l.sharethis.com i.creativecommons.org licensebuttons.net www.googleapis.com www.google.com clients1.google.com encrypted-tbn0.gstatic.com encrypted-tbn1.gstatic.com encrypted-tbn2.gstatic.com encrypted-tbn3.gstatic.com 'unsafe-inline'; object-src *.cpj.org cpj.org http://cpj.org; report-uri https://cpj.org/cgi-bin/csp-collector.cgi
+Connection : keep-alive
+Location : https://cpj.org/2001/03/attacks-on-the-press-2000-the-gulf-states-saudi-ar.php
+Date : Thu, 05 Jan 2017 06:34:25 GMT
+CF-RAY : 31c4e781981b28ea-DXB
+Content-Type : text/html
+X-Frame-Options : SAMEORIGIN
+",21,39,1,5,16979,,29
+8,22,0,1663,f,80,200,"Content-Length : 217
+Transfer-Encoding : chunked
+Accept-Ranges : bytes
+Server : Apache
+Connection : close
+Location : http://www.hrusa.org/default.shtm
+Date : Sat, 28 Jan 2017 12:58:08 GMT
+Content-Type : text/html; charset=UTF-8
+",323,1,6,5,16992,,30
+9,28,0,1683,f,80,200,"X-Cache-Status : miss
+Content-language : ar
+X-Powered-By : HHVM/3.12.7
+Transfer-Encoding : chunked
+Content-Length : 0
+Last-Modified : Thu, 05 Jan 2017 00:54:58 GMT
+Location : https://ar.wikipedia.org/wiki/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87_%D8%A8%D9%86_%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B9%D8%B2%D9%8A%D8%B2
+X-Client-IP : 46.151.211.179
+Date : Thu, 05 Jan 2017 06:31:48 GMT
+Accept-Ranges : bytes
+X-Varnish : 424234384, 611904746, 701429714
+X-Cache : cp1066 miss, cp3032 miss, cp3031 miss
+Set-Cookie : GeoIP=SA:01:Riyadh:24.65:46.72:v4; Path=/; secure; Domain=.wikipedia.org
+Age : 0
+Strict-Transport-Security : max-age=31536000; includeSubDomains; preload
+Server : mw1247.eqiad.wmnet
+Connection : keep-alive
+P3P : CP=""This is not a P3P policy! See https://ar.wikipedia.org/wiki/%D8%AE%D8%A7%D8%B5:CentralAutoLogin/P3P for more info.""
+Via : 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4
+X-Analytics : ns=0;page_id=16224;https=1;nocookies=1
+X-Content-Type-Options : nosniff
+Vary : Accept-Encoding,Cookie,Authorization
+X-UA-Compatible : IE=Edge
+Cache-Control : private, s-maxage=0, max-age=0, must-revalidate
+Content-Type : text/html; charset=UTF-8
+Backend-Timing : D=226554 t=1483597908643785
+",1484,44,1,5,17012,,34
+10,29,0,1758,f,80,200,"Content-Length : 334
+Accept-Ranges : bytes
+Server : Apache/2.2.26 (Unix) mod_ssl/2.2.26 OpenSSL/0.9.8e-fips-rhel5 mod_auth_passthrough/2.1 mod_bwlimited/1.4
+Last-Modified : Mon, 06 Oct 2008 08:09:10 GMT
+Connection : close
+ETag : ""76d001e-14e-4589132a4b580""
+Date : Thu, 05 Jan 2017 06:34:23 GMT
+Content-Type : text/html
+",1225,1,2,5,17086,,39

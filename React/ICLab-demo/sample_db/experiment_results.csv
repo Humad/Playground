@@ -1,0 +1,2 @@
+id,filename_id,server_time,filename_time,client_time,time_taken,file_comments,is_control,asn_error_id,meta_exception_id,vpn_hostname_id,country_id,centinel_version_id,vpn_provider_id,as_id,ipv4_id,schedule_name_id,input_files_id,client_id
+1,1,2017-01-26 16:11:22.944956,2017-01-26 17:11:32.683299,2017-01-26 17:11:32.683299,299.487,,f,,,,1,1,1,1,1,1,1,1

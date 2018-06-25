@@ -1,0 +1,112 @@
+[
+    {
+      "id": 1,
+      "port": 17613,
+      "success": "t",
+      "time": 280,
+      "experiment_id": 3,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": "",
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 2,
+      "port": 26919,
+      "success": "t",
+      "time": 314,
+      "experiment_id": 3,
+      "ipv4_id": 827,
+      "url_id": 9,
+      "tcp_failure_id": "",
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 3,
+      "port": 17613,
+      "success": "f",
+      "time": 5005,
+      "experiment_id": 7,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 4,
+      "port": 17613,
+      "success": "f",
+      "time": 5005,
+      "experiment_id": 2,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 5,
+      "port": 17613,
+      "success": "f",
+      "time": 5005,
+      "experiment_id": 1,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 6,
+      "port": 17613,
+      "success": "f",
+      "time": 5003,
+      "experiment_id": 5,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 7,
+      "port": 17613,
+      "success": "f",
+      "time": 5004,
+      "experiment_id": 4,
+      "ipv4_id": 837,
+      "url_id": 10,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 8,
+      "port": 26919,
+      "success": "f",
+      "time": 5005,
+      "experiment_id": 7,
+      "ipv4_id": 827,
+      "url_id": 9,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 9,
+      "port": 26919,
+      "success": "t",
+      "time": 109,
+      "experiment_id": 2,
+      "ipv4_id": 827,
+      "url_id": 9,
+      "tcp_failure_id": "",
+      "tcp_ip_error_id": ""
+    },
+    {
+      "id": 10,
+      "port": 26919,
+      "success": "f",
+      "time": 5005,
+      "experiment_id": 1,
+      "ipv4_id": 827,
+      "url_id": 9,
+      "tcp_failure_id": 1,
+      "tcp_ip_error_id": ""
+    }
+  ]
