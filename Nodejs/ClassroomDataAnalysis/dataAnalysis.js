@@ -1,18 +1,13 @@
-// - ts_student_help 
-// - ts_ta_arrive
-// - ts_ta_done
-// - ts_student_cancel
-// - ts_queue_clear
-// - wait_time
-// - help_time
-
-// SQL Query to get data for today: SELECT * FROM events WHERE ts >= '2018-06-19 16:00:00' AND ts <= '2018-06-20 05:00:00' ORDER BY ts ASC;
-
 const fs = require('fs');
-const realNames = JSON.parse(JSON.stringify(require('./raw_data/realNames.js')));
+const realTANames = JSON.parse(JSON.stringify(require('./raw_data/realNames.js').tas));
+const realStudentNames = JSON.parse(JSON.stringify(require('./raw_data/realNames.js').students));
 const moment = require('moment-timezone');
 
-// Adds basic student data to the refactored data array
+/**
+ * Adds student name and time when student enters queue.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function addStudent(eventData, refactoredData) {
     refactoredData.push({
         student: eventData.student,
@@ -20,7 +15,11 @@ function addStudent(eventData, refactoredData) {
     });
 }
 
-// Updates information in refactored data array by adding TA information
+/**
+ * Update assigned TA information for student.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function addTA(eventData, refactoredData) {
 
     // Find data ("row") for assigned student
@@ -35,7 +34,7 @@ function addTA(eventData, refactoredData) {
             // Update wait time
             var waitTime = Date.parse(currentData.timeReceivedHelp) - Date.parse(currentData.timeEnteredQueue);
             var waitTimeInMinutes = waitTime / 60000;
-            waitTimeInMinutes = waitTimeInMinutes > 60 ? 60 : waitTimeInMinutes;
+            waitTimeInMinutes = waitTimeInMinutes > 60 ? 60 : waitTimeInMinutes; // anything over 60 minutes get brought down to 60
             currentData.waitTime = Math.floor(waitTimeInMinutes * 100) / 100;
 
             break;
@@ -43,7 +42,11 @@ function addTA(eventData, refactoredData) {
     }
 }
 
-// Updates information in refactored data array by updating student cancel time
+/**
+ * Update student cancel time.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function cancelStudent(eventData, refactoredData) {
 
     // Find data ("row") for assigned student
@@ -57,7 +60,11 @@ function cancelStudent(eventData, refactoredData) {
     }
 }
 
-// Updates information in refactored data array by updating student help time
+/**
+ * Update student help time.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function completeHelp(eventData, refactoredData) {
 
     // Find data ("row") for assigned TA
@@ -70,13 +77,18 @@ function completeHelp(eventData, refactoredData) {
             // Update help time
             var helpTime = Date.parse(currentData.timeCompleted) - Date.parse(currentData.timeReceivedHelp);
             var helpTimeInMinutes = helpTime / 60000;
-            helpTimeInMinutes = helpTimeInMinutes > 60 ? 60 : helpTimeInMinutes;
+            helpTimeInMinutes = helpTimeInMinutes > 60 ? 60 : helpTimeInMinutes; // anything over 60 minutes comes down to 60
             currentData.helpTime = Math.floor(helpTimeInMinutes * 100) / 100;
             break;
         }
     }
 }
 
+/**
+ * Update time cleared for students.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function clearQueue(eventData, refactoredData) {
 
     // Find data ("row") for assigned student
@@ -89,6 +101,11 @@ function clearQueue(eventData, refactoredData) {
     }
 }
 
+/**
+ * Remove student from queue.
+ * @param {Object} eventData 
+ * @param {Array[Object]} refactoredData 
+ */
 function removeStudent(eventData, refactoredData) {
 
     for (var i = refactoredData.length - 1; i >= 0; i--) {
@@ -96,12 +113,17 @@ function removeStudent(eventData, refactoredData) {
         
         if (currentData.student === eventData.student && !currentData.timeCleared && !currentData.ta) {
             currentData.timeCleared = eventData.ts;
+            currentData.removed = true;
             break;
         }
     }
 }
 
-// Reduces multiple rows for the same student into one
+/**
+ * Condenses student information from refactored data into one object.
+ * @param {Object} studentMap 
+ * @param {Array[Object]} refactoredData 
+ */
 function gatherStudentInformation(studentMap, refactoredData) {
 
     refactoredData.forEach(function(data) {
@@ -116,9 +138,16 @@ function gatherStudentInformation(studentMap, refactoredData) {
         }
 
         var studentData = studentMap[data.student];
-        if (data.waitTime && data.helpTime) {
+
+        if (data.waitTime) {
             studentData.avgWaitTime = Math.floor(((studentData.avgWaitTime * studentData.numHelp + data.waitTime) / (studentData.numHelp + 1)) * 100) / 100;
+        }
+
+        if (data.helpTime) {
             studentData.avgHelpTime = Math.floor(((studentData.avgHelpTime * studentData.numHelp + data.helpTime) / (studentData.numHelp + 1)) * 100) / 100;
+        }
+
+        if (!data.timeCleared && !data.timeCancelled) {
             studentData.numHelp = studentData.numHelp + 1;
         }
 
@@ -128,6 +157,11 @@ function gatherStudentInformation(studentMap, refactoredData) {
     });
 }
 
+/**
+ * Condenses student information from refactored data into one object.
+ * @param {Object} taMap 
+ * @param {Array[Object]} refactoredData 
+ */
 function gatherTAInformation(taMap, refactoredData) {
 
     refactoredData.forEach(function(data) {
@@ -155,6 +189,10 @@ function gatherTAInformation(taMap, refactoredData) {
     });
 }
 
+/**
+ * Gets average wait time.
+ * @param {Object} studentMap 
+ */
 function getAverageWaitTime(studentMap) {
     var totalTime = 0;
     for (var i in studentMap) {
@@ -163,6 +201,10 @@ function getAverageWaitTime(studentMap) {
     return Math.floor(totalTime / Object.keys(studentMap).length * 100) / 100;
 }
 
+/**
+ * Gets average help time.
+ * @param {Object} studentMap 
+ */
 function getAverageHelpTime(studentMap) {
     var totalTime = 0;
     for (var i in studentMap) {
@@ -171,52 +213,64 @@ function getAverageHelpTime(studentMap) {
     return Math.floor(totalTime / Object.keys(studentMap).length * 100) / 100;
 }
 
-function writeDataToFile() {
+/**
+ * Writes data to file.
+ * @param {Array[Object]} refactoredData 
+ * @param {Object} studentMap 
+ * @param {Object} taMap 
+ */
+function writeDataToFile(refactoredData, studentMap, taMap) {
     fs.writeFile('./parsed_data/interactionData.json', JSON.stringify(refactoredData, null, 4), 'utf8', function(error, data) {});
     fs.writeFile('./parsed_data/studentData.json', JSON.stringify(studentMap, null, 4), 'utf8', function(error, data) {});
     fs.writeFile('./parsed_data/taData.json', JSON.stringify(taMap, null, 4), 'utf8', function(error, data){});
 }
 
-function getFormattedTime(dateTime) {
-    let momentDate = moment(dateTime).tz("America/Los_Angeles").format();
-    let date = momentDate.substring(0, 10);
-    let time = momentDate.substring(11, 16);
-    return date + " " + time;
-}
-
+/**
+ * Cleans up data by adding real names and formatted time.
+ * @param {Array[Object]} refactoredData 
+ */
 function cleanData(refactoredData) {
     for (var i = 0; i < refactoredData.length; i++) {
-        if (refactoredData[i].ta) {
-            refactoredData[i].ta = realNames[refactoredData[i].ta] ? realNames[refactoredData[i].ta] : refactoredData[i].ta;
+
+        let currentRow = refactoredData[i];
+
+        if (currentRow.ta) {
+            currentRow.ta = realTANames[currentRow.ta] ? realTANames[currentRow.ta] : currentRow.ta;
         }
 
-        if (refactoredData[i].student) {
-            refactoredData[i].student = realNames[refactoredData[i].student] ? realNames[refactoredData[i].student] : refactoredData[i].student;
+        if (currentRow.student) {
+            currentRow.student = realStudentNames[currentRow.student] ? realStudentNames[currentRow.student] : currentRow.student;
         }
 
-        if (refactoredData[i].timeCancelled) {
-            refactoredData[i].timeCancelled = getFormattedTime(refactoredData[i].timeCancelled);
+        if (currentRow.timeCancelled) {
+            currentRow.timeCancelled = getFormattedTime(currentRow.timeCancelled);
         }
 
-        if (refactoredData[i].timeCleared) {
-            refactoredData[i].timeCleared = getFormattedTime(refactoredData[i].timeCleared);
+        if (currentRow.timeCleared) {
+            currentRow.timeCleared = getFormattedTime(currentRow.timeCleared);
+            if (currentRow.removed) {
+                currentRow.timeCleared = "Removed: " + currentRow.timeCleared;
+            }
         }
 
-        if (refactoredData[i].timeCompleted) {
-            refactoredData[i].timeCompleted = getFormattedTime(refactoredData[i].timeCompleted);
+        if (currentRow.timeCompleted) {
+            currentRow.timeCompleted = getFormattedTime(currentRow.timeCompleted);
         }
 
-        if (refactoredData[i].timeEnteredQueue) {
-            refactoredData[i].timeEnteredQueue = getFormattedTime(refactoredData[i].timeEnteredQueue);
+        if (currentRow.timeEnteredQueue) {
+            currentRow.timeEnteredQueue = getFormattedTime(currentRow.timeEnteredQueue);
         }
 
-        if (refactoredData[i].timeReceivedHelp) {
-            refactoredData[i].timeReceivedHelp = getFormattedTime(refactoredData[i].timeReceivedHelp);
+        if (currentRow.timeReceivedHelp) {
+            currentRow.timeReceivedHelp = getFormattedTime(currentRow.timeReceivedHelp);
         }
     }
 }
 
-// Reads through JSON data and refactors it with relevant information
+/**
+ * Reads through JSON data and refactors it with relevant information
+ * @param {Array[Object]} data
+ */
 function main(data) {
 
     let refactoredData = [];
@@ -235,6 +289,7 @@ function main(data) {
                 break;
             case "done":
             case "doneoff":
+            case "d":
                 completeHelp(data[i], refactoredData);
                 break;
             case "clear":
@@ -252,14 +307,36 @@ function main(data) {
     gatherStudentInformation(studentMap, refactoredData);
     gatherTAInformation(taMap, refactoredData);
 
+    function writeData() {
+        writeDataToFile(refactoredData, studentMap, taMap);
+    }
+
     return {
         refactoredData: refactoredData,
         studentMap: studentMap,
         taMap: taMap,
         averageWaitTime: getAverageWaitTime(studentMap),
         averageHelpTime: getAverageHelpTime(studentMap),
-        writeDataToFile: writeDataToFile
+        writeDataToFile: writeData
     }
 }
 
+//////////////////////
+// Helper functions //
+//////////////////////
+
+/**
+ * Gets datetime formatted in YYYY-MM-DD HH-MM-SS format.
+ * @param {string} dateTime 
+ */
+function getFormattedTime(dateTime) {
+    let momentDate = moment(dateTime).add(-7, "hours").format();
+    let date = momentDate.substring(0, 10);
+    let time = momentDate.substring(11, 16);
+    return date + " " + time;
+}
+
+//////////////
+// Exports //
+/////////////
 module.exports = main;

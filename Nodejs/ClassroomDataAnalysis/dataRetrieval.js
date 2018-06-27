@@ -1,5 +1,4 @@
 const moment = require('moment-timezone');
-// Postgres setup
 const Pool = require('pg').Pool;
 
 var config = {
@@ -16,8 +15,6 @@ const pool = new Pool(config);
 let dailyData;
 let lastChecked;
 let dataForDays = {};
-
-getDailyData();
 
 function getDailyData() {
 
@@ -53,8 +50,6 @@ function getDataForDay(dayString) {
         let tomorrowString = moment(dayString).add(1, 'days').format('YYYY-MM-DD');
         let queryString = "SELECT * FROM events WHERE ts >= '" + dayString + " 16:00:00' AND ts <= '" + tomorrowString  + " 05:00:00' ORDER BY ts ASC";
 
-        console.log(dayString + ", " + tomorrowString);
-
         if (dataForDays.hasOwnProperty(dayString)) {
             // If already have data for given day, no need to process again
             resolve(dataForDays[dayString]);
@@ -87,19 +82,46 @@ function getDataForAllDays() {
         Promise.all(allPromises).then(function(data) {
             resolve(data);
         });
-
-
     });
 }
 
-// Helper functions
+function getDataForRange(startDate, endDate) {
+    return new Promise(function(resolve,reject) {
+        let start = moment(startDate);
+        let end = moment(endDate);
+
+        let allPromises = [];
+
+        while (start <= end) {
+            allPromises.push(getDataForDay(start.format("YYYY-MM-DD")));
+            start.add(1, 'days');
+        }
+
+        Promise.all(allPromises).then(function(data) {
+            let cleanedData = [];
+            for (var i = 0; i < data.length; i++) {
+                cleanedData.push({
+                    averageWaitTime: data[i].averageWaitTime,
+                    averageHelpTime: data[i].averageHelpTime,
+                    date: data[i].date
+                });
+            }
+            resolve(cleanedData);
+        });
+    });
+}
+
+//////////////////////
+// Helper functions //
+//////////////////////
+
 function getDate(offset) {
     return moment().add(offset, 'days').format('YYYY-MM-DD');
 }
 
 function getPastDays() {
     let today = moment().tz('America/Los_Angeles');
-    let pastDay = moment('2018-05-29'); // First day of summer classes
+    let pastDay = moment(process.env.FIRST_DAY_OF_CLASSES); // First day of summer classes
 
     let allDays = [];
 
@@ -111,9 +133,14 @@ function getPastDays() {
     return allDays;
 }
 
+/////////////
+// Exports //
+/////////////
+
 module.exports = {
     getDailyData: getDailyData,
     getDataForDay: getDataForDay,
     getDataForAllDays: getDataForAllDays,
-    getDate: getDate
+    getDate: getDate,
+    getDataForRange: getDataForRange
 }
