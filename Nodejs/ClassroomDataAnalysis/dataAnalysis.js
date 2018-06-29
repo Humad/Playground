@@ -192,6 +192,7 @@ function gatherTAInformation(taMap, refactoredData) {
 /**
  * Gets average wait time.
  * @param {Object} studentMap 
+ * @returns {number} - Average wait time
  */
 function getAverageWaitTime(studentMap) {
     var totalTime = 0;
@@ -204,6 +205,7 @@ function getAverageWaitTime(studentMap) {
 /**
  * Gets average help time.
  * @param {Object} studentMap 
+ * @returns {number} - Average help time
  */
 function getAverageHelpTime(studentMap) {
     var totalTime = 0;
@@ -270,6 +272,7 @@ function cleanData(refactoredData) {
 /**
  * Reads through JSON data and refactors it with relevant information
  * @param {Array[Object]} data
+ * @returns {Object} - Analyzed data
  */
 function main(data) {
 
@@ -328,6 +331,7 @@ function main(data) {
 /**
  * Gets datetime formatted in YYYY-MM-DD HH-MM-SS format.
  * @param {string} dateTime 
+ * @returns {string} - Formatted date and time
  */
 function getFormattedTime(dateTime) {
     let momentDate = moment(dateTime).add(-7, "hours").format();

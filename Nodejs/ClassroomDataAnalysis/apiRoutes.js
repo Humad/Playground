@@ -12,22 +12,44 @@ router.get('/students', function(req, res) {
 });
 
 router.get('/tas', function(req, res) {
-    poolParty.getDataForAllDays()
-    .then(function(data) {
-        data = data.map(function(item) {
-            return item.taMap;
-        });
-        res.status(200).json(data);
-    })
-    .catch(function(err) {
-        console.log(err);
-        res.status(500).json({});
-    });
+    res.status(200).json(realTANames);
 });
+
+router.get('/student', function(req, res) {
+    if (req.query.name && req.query.date) {
+        poolParty.getDataForDay(req.query.date)
+        .then(function(data) {
+            res.status(200).json({
+                studentData: data.studentMap[req.query.name]
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+            res.status(500).json({});
+        });
+    } else {
+        res.status(400).json({
+            "message": "Provide a name and a date"
+        });
+    }
+})
 
 router.get('/ta', function(req, res) {
     if (req.query.name && req.query.date) {
-        // get data for a certain date
+        poolParty.getDataForDay(req.query.date)
+        .then(function(data) {
+            res.status(200).json({
+                taData: data.taMap[req.query.name]
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+            res.status(500).json({})
+        });
+    } else {
+        res.status(400).json({
+            "message": "Provide a name and a date"
+        });
     }
 });
 
@@ -42,6 +64,7 @@ router.get('/days', function(req, res) {
             });
         })
         .catch(function(err) {
+            console.log(err);
             res.status(500).json({});
         });
     }

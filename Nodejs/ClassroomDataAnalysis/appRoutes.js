@@ -30,7 +30,8 @@ router.get('/student/:studentName', function(req, res) {
     poolParty.getDailyData()
     .then(function(data) {
         res.status(200).render('student', {
-            data: data.studentMap[req.params.studentName]
+            name: req.params.studentName,
+            firstDay: process.env.FIRST_DAY_OF_CLASSES
         });
     })
     .catch(function(err) {
@@ -45,7 +46,8 @@ router.get('/ta/:taName', function(req, res) {
     poolParty.getDailyData()
     .then(function(data) {
         res.status(200).render('ta', {
-            data: data.taMap[req.params.taName]
+            name: req.params.taName,
+            firstDay: process.env.FIRST_DAY_OF_CLASSES
         });
     })
     .catch(function(err) {

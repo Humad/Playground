@@ -12,10 +12,15 @@ var config = {
 
 const pool = new Pool(config);
 
+// Caching variables
 let dailyData;
 let lastChecked;
 let dataForDays = {};
 
+/**
+ * Queries the database to  get data for the current day. 
+ * @return {Promise} - Promise data contains interaction rows, student data, ta data, and help/wait times.
+ */
 function getDailyData() {
 
     return new Promise(function(resolve, reject) {
@@ -30,7 +35,7 @@ function getDailyData() {
     
         let todayString = getDate(0);
         let tomorrowString = getDate(1);
-        let queryString = "SELECT * FROM events WHERE ts >= '" + todayString + " 16:00:00' AND ts <= '" + tomorrowString + " 05:00:00' ORDER BY ts ASC";
+        let queryString = `SELECT * FROM events WHERE ts >= '${todayString} 16:00:00' AND ts <= '${tomorrowString} 05:00:00' ORDER BY ts ASC`;
 
         pool.query(queryString, function(err, result) {
             if (err) {
@@ -44,11 +49,15 @@ function getDailyData() {
     });
 }
 
+/**
+ * Queries the database to  get data for the specified day. 
+ * @return {Promise} - Promise data contains interaction rows, student data, ta data, and help/wait times.
+ */
 function getDataForDay(dayString) {
 
     return new Promise(function(resolve, reject) {
         let tomorrowString = moment(dayString).add(1, 'days').format('YYYY-MM-DD');
-        let queryString = "SELECT * FROM events WHERE ts >= '" + dayString + " 16:00:00' AND ts <= '" + tomorrowString  + " 05:00:00' ORDER BY ts ASC";
+        let queryString = `SELECT * FROM events WHERE ts >= '${dayString} 16:00:00' AND ts <= '${tomorrowString} 05:00:00' ORDER BY ts ASC`;
 
         if (dataForDays.hasOwnProperty(dayString)) {
             // If already have data for given day, no need to process again
@@ -68,6 +77,12 @@ function getDataForDay(dayString) {
     });
 }
 
+/**
+ * Queries the database to get data for all days between starting day and current day. 
+ * @return {Promise} - Promise data contains an array of objects containing interaction rows, student data, ta data, and help/wait times.
+ * Note: This function is only used when the app is first started to cache data for all days. Using it and sending the returned data to the browser
+ *       is not a good idea simply because there's too much data to pass around.
+ */
 function getDataForAllDays() {
 
     return new Promise(function(resolve, reject) {
@@ -85,6 +100,10 @@ function getDataForAllDays() {
     });
 }
 
+/**
+ * Queries the database to get data for a range. 
+ * @return {Promise} - Promise data contains an array of objects containing date and help/wait times.
+ */
 function getDataForRange(startDate, endDate) {
     return new Promise(function(resolve,reject) {
         let start = moment(startDate);
@@ -115,10 +134,19 @@ function getDataForRange(startDate, endDate) {
 // Helper functions //
 //////////////////////
 
+/**
+ * Gets a date
+ * @param {number} offset - Number of days to add to the current day; used to get a future date
+ * @returns {string} - YYYY-MM-DD formatted date
+ */
 function getDate(offset) {
     return moment().add(offset, 'days').format('YYYY-MM-DD');
 }
 
+/**
+ * Gets past dates
+ * @returns {Array[string]} - Formatted strings from first day to current day
+ */
 function getPastDays() {
     let today = moment().tz('America/Los_Angeles');
     let pastDay = moment(process.env.FIRST_DAY_OF_CLASSES); // First day of summer classes

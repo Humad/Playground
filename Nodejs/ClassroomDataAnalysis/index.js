@@ -27,6 +27,9 @@ setInterval(function() {
 // Time in Postgres is 7 hours ahead Pacific Time
 // 09:00 in Pacific Time is 16:00 in Postgres time
 // So for a normal Horizons day, we need data from (today, 16:00) to (tomorrow, 05:00)
+
+// Selecting maximum queue size for section:
+// SELECT section_id, max(q_size) FROM events WHERE ts >= '2018-06-28 16:00:00' AND ts <= '2018-06-29 05:00:00' GROUP BY section_id;
 // ---- //
 
 // Initialize data retrieval and get data when server runs to avoid slow loading times for pages.
