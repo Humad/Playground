@@ -6,7 +6,12 @@ class Todo extends React.Component {
     }
 
     render() {
-        return (<li><button>X</button>{this.props.task.completed ? <strike>{this.props.task.taskText}</strike> : this.props.task.taskText}</li>);
+        return (
+            <li>
+                <button onClick={() => this.props.todoXClick()}>X</button>
+                <span onClick={() => this.props.todoToggle()}>{this.props.task.completed ? <strike>{this.props.task.taskText}</strike> : this.props.task.taskText}</span>
+            </li>
+        );
     }
 }
 

@@ -10,6 +10,7 @@ class TodoApp extends React.Component {
         }
 
         this.addTodo = this.addTodo.bind(this);
+        this.removeTodo = this.removeTodo.bind(this);
     }
 
     componentDidMount() {
@@ -32,11 +33,31 @@ class TodoApp extends React.Component {
         });
     }
 
+    removeTodo(index) {
+        var dummyData = this.state.todos.slice();
+        dummyData.splice(index, 1);
+        this.setState({
+            todos: dummyData
+        });
+    }
+
+    toggleTodo(index) {
+        var dummyData = this.state.todos.slice();
+        dummyData[index].completed = !dummyData[index].completed;
+        this.setState({
+            todos: dummyData
+        });
+    }
+
     render() {
         return (
             <div>
                 <InputLine submit={(str) => this.addTodo(str)}/>
-                <TodoList todos={this.state.todos} />
+                <TodoList 
+                    todoXClick={(index) => this.removeTodo(index)} 
+                    todoToggle={(index) => this.toggleTodo(index)} 
+                    todos={this.state.todos} 
+                />
             </div>
         );
     }
