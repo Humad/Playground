@@ -9,7 +9,7 @@ class Todo extends React.Component {
         return (
             <li>
                 <button onClick={() => this.props.todoXClick()}>X</button>
-                <span onClick={() => this.props.todoToggle()}>{this.props.task.completed ? <strike>{this.props.task.taskText}</strike> : this.props.task.taskText}</span>
+                <span onClick={() => this.props.todoToggle()}>{this.props.task.completed ? <strike>{this.props.task.task}</strike> : this.props.task.task}</span>
             </li>
         );
     }

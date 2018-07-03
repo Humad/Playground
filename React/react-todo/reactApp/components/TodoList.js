@@ -11,8 +11,9 @@ class TodoList extends React.Component {
             <ul>
                 {this.props.todos.map((item) => {
                     return <Todo 
-                        todoXClick={() => this.props.todoXClick(this.props.todos.indexOf(item))} 
-                        todoToggle={() => this.props.todoToggle(this.props.todos.indexOf(item))} 
+                        key={item._id}
+                        todoXClick={() => this.props.todoXClick(item._id)} 
+                        todoToggle={() => this.props.todoToggle(item._id)} 
                         task={item} 
                         />
                     })

@@ -1,6 +1,9 @@
 import React from 'react';
 import InputLine from './InputLine';
 import TodoList from './TodoList';
+import axios from 'axios';
+
+const dbUrl = "http://localhost:3000/db";
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -14,38 +17,69 @@ class TodoApp extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            todos: [
-                {taskText: "Come to SF", completed: true},
-                {taskText: "Master React", completed: false},
-                {taskText: "Sleep", completed: false}
-            ]
-        });
+        axios.get(dbUrl + "/all")
+        .then(function (response) {
+            console.log("Success:", response);
+            this.setState({
+                todos: response.data
+            });
+        }.bind(this))
+        .catch(function (error) {
+            console.log("Error:",error);
+        });  
     }
 
     addTodo(todo) {
+        console.log(todo);
+        axios.post(dbUrl + "/add", {task: todo})
+        .then(function (response) {
+            console.log("Success:", response);
+            var tempData = this.state.todos.slice();
+            tempData.push(response.data);
+            this.setState({
+                todos: tempData
+            });
+        }.bind(this))
+        .catch(function (error) {
+            console.log("Error:",error);
+        });  
+    }
 
-        var dummyData = this.state.todos.slice();
-        dummyData.push({taskText: todo, completed: false});
-
-        this.setState({
-            todos: dummyData
+    removeTodo(id) {
+        console.log(id);
+        axios.post(dbUrl + "/remove", {id: id})
+        .then(function(response) {
+            console.log("Removed todo", response);
+            var tempData = this.state.todos.filter(function(item) {
+                return item._id !== id;
+            });
+            
+            this.setState({
+                todos: tempData
+            });
+        }.bind(this))
+        .catch(function(error) {
+            console.log("Error:", error);
         });
     }
 
-    removeTodo(index) {
-        var dummyData = this.state.todos.slice();
-        dummyData.splice(index, 1);
-        this.setState({
-            todos: dummyData
-        });
-    }
+    toggleTodo(id) {
+        axios.post(dbUrl + "/toggle", {id: id})
+        .then(function(response) {
+            console.log("Toggled todo", response);
+            var tempData = this.state.todos;
+            tempData.forEach(function(item) {
+                if (item._id === id) {
+                    item.completed = !item.completed
+                }
+            });
 
-    toggleTodo(index) {
-        var dummyData = this.state.todos.slice();
-        dummyData[index].completed = !dummyData[index].completed;
-        this.setState({
-            todos: dummyData
+            this.setState({
+                todos: tempData
+            });
+        }.bind(this))
+        .catch(function(error) {
+            console.log("Error:", error);
         });
     }
 
@@ -54,8 +88,8 @@ class TodoApp extends React.Component {
             <div>
                 <InputLine submit={(str) => this.addTodo(str)}/>
                 <TodoList 
-                    todoXClick={(index) => this.removeTodo(index)} 
-                    todoToggle={(index) => this.toggleTodo(index)} 
+                    todoXClick={(id) => this.removeTodo(id)} 
+                    todoToggle={(id) => this.toggleTodo(id)} 
                     todos={this.state.todos} 
                 />
             </div>
