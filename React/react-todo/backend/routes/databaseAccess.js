@@ -39,14 +39,13 @@ router.post('/toggle', function(req, res) {
 });
 
 router.post('/remove', function(req, res) {
-    console.log(req.body.id);
-    TodoItem.findOneAndRemove({_id: req.body.id}, function(err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send("Removed!");
-        }
-    });
+    TodoItem.findOneAndRemove({_id: req.body.id})
+    .then(response => {
+        res.send("Removed!");
+    })
+    .catch(error => {
+        res.send(error);
+    })
 });
 
 module.exports = router;   

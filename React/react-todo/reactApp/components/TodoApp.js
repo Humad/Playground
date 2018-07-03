@@ -30,7 +30,6 @@ class TodoApp extends React.Component {
     }
 
     addTodo(todo) {
-        console.log(todo);
         axios.post(dbUrl + "/add", {task: todo})
         .then(function (response) {
             console.log("Success:", response);
@@ -46,7 +45,6 @@ class TodoApp extends React.Component {
     }
 
     removeTodo(id) {
-        console.log(id);
         axios.post(dbUrl + "/remove", {id: id})
         .then(function(response) {
             console.log("Removed todo", response);
