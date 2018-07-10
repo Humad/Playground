@@ -44,6 +44,14 @@ public class PairMaker {
                   String avoid = avoidsIterator.next();
                   newStudent.avoids.add(avoid);
                }
+
+               JSONArray wants = (JSONArray) student.get("Wants");
+               Iterator<String> wantsIterator = wants.iterator();
+
+               while (wantsIterator.hasNext()) {
+                   String want = wantsIterator.next();
+                   newStudent.wants.add(want);
+               }
                
                allStudents.add(newStudent);
                unmatchedStudents.add(newStudent);
@@ -64,13 +72,17 @@ public class PairMaker {
       
       // While there are still unmatched students
       while (!unmatchedStudents.isEmpty()) {
-         Student currentStudent = getRandomStudent(unmatchedStudents);
+         Student currentStudent = getNextUnmatchedStudent(unmatchedStudents);
+         
+         // Get student wants out of the way
+         handleWants(currentStudent, unmatchedStudents, allStudents);
          
          // While this student has not been matched
-         while (currentStudent.currentMatch == null) {
+         while (currentStudent != null && currentStudent.currentMatch == null) {
          
-            // Get a potential match from the set of all students
-            Student potentialMatch = getPotentialMatch(currentStudent, allStudents);
+            // Get a potential match from the set of all students. If no match found, quit
+            Student potentialMatch = getPotentialMatch(currentStudent, allStudents, unmatchedStudents);
+            if (potentialMatch == null) break;
             
             // Both are unmatched
             if (isPossibleToMatch(currentStudent, potentialMatch)) {
@@ -92,8 +104,12 @@ public class PairMaker {
             } else if (prefers(currentStudent, potentialMatch)) { // Matched but would prefer other
             
                // Unmatch previous
-               potentialMatch.currentMatch.currentMatch = null;
-               unmatchedStudents.add(potentialMatch.currentMatch);
+               
+               if (potentialMatch.currentMatch != null) {
+                  potentialMatch.currentMatch.currentMatch = null;
+                  unmatchedStudents.add(potentialMatch.currentMatch);
+               }
+               
                
                // Remove from unmatched set
                if (unmatchedStudents.contains(currentStudent)) {
@@ -113,7 +129,55 @@ public class PairMaker {
       }
    }
    
-   public static Student getRandomStudent(Set<Student> unmatchedStudents) {
+   public static void handleWants(Student currentStudent, Set<Student> unmatchedStudents, List<Student> allStudents) {
+      
+      // If this student wants to be matched with someone
+      if (currentStudent.wants.size() > 0) {
+         
+         // Look through all students
+         for (Student potentialMatch : allStudents) {
+         
+            // If the potential match already wants someone else, don't change
+            if (potentialMatch.currentMatch != null && (potentialMatch.currentMatch.wants.contains(potentialMatch.name) || potentialMatch.wants.contains(potentialMatch.currentMatch.name))) {
+               continue;
+            }
+            
+            // If either wants to avoid, don't change
+            if (potentialMatch.avoids.contains(currentStudent.name) || currentStudent.avoids.contains(potentialMatch.name)) {
+               continue;
+            }
+      
+            // If this is a student that is wanted
+            if (currentStudent.wants.contains(potentialMatch.name)) {
+            
+               currentStudent.currentMatch = potentialMatch;
+               
+               // Unmatch previous
+               if (potentialMatch.currentMatch != null) {
+                  potentialMatch.currentMatch.currentMatch = null;
+                  unmatchedStudents.add(potentialMatch.currentMatch);
+               }
+               
+               // Remove from list of unmatched
+               if (unmatchedStudents.contains(currentStudent)) {
+                  unmatchedStudents.remove(currentStudent);
+               }
+               
+               if (unmatchedStudents.contains(potentialMatch)) {
+                  unmatchedStudents.remove(potentialMatch);
+               }
+               
+               
+               potentialMatch.currentMatch = currentStudent;
+               
+               
+               return;
+            }
+         }
+      }
+   }
+   
+   public static Student getNextUnmatchedStudent(Set<Student> unmatchedStudents) {
    
       // Pick out first student from set
       for (Student s : unmatchedStudents) {
@@ -124,10 +188,10 @@ public class PairMaker {
    }
    
    
-   public static Student getPotentialMatch(Student currentStudent, List<Student> allStudents) {
+   public static Student getPotentialMatch(Student currentStudent, List<Student> allStudents, Set<Student> unmatchedStudents) {
    
-      // Shuffle all students, return first potential one
-      Collections.shuffle(allStudents);
+      // Go through all students, return first potential one
+      //Collections.shuffle(allStudents); // shuffle for random fun
       for(Student student : allStudents) {
       
         if (!currentStudent.seen.contains(student.name) && currentStudent != student) {
@@ -139,18 +203,37 @@ public class PairMaker {
         }
       }
       
-      return getPotentialMatch(currentStudent, allStudents);
+      // Can't find any match for this student; seen all
+      if (unmatchedStudents.contains(currentStudent)) {
+         unmatchedStudents.remove(currentStudent);
+      }
+      
+      return null;
    } 
    
    
    public static boolean isPossibleToMatch(Student currentStudent, Student potentialMatch) {
       // Both are unmatched, both do NOT want to avoid each other
-      return potentialMatch.currentMatch == null && !currentStudent.avoids.contains(potentialMatch.name) && !potentialMatch.avoids.contains(currentStudent.name);
+      return currentStudent.currentMatch == null && potentialMatch.currentMatch == null && !currentStudent.avoids.contains(potentialMatch.name) && !potentialMatch.avoids.contains(currentStudent.name);
    }
    
    public static boolean prefers(Student currentStudent, Student potentialMatch) {
       // Potential student is matched but prefers current student over current match
-      return potentialMatch.currentMatch != null && Math.abs(potentialMatch.rank - potentialMatch.currentMatch.rank) < Math.abs(potentialMatch.rank - currentStudent.rank) && !potentialMatch.avoids.contains(currentStudent.name) && !currentStudent.avoids.contains(potentialMatch.name);
+      
+      // If the potential match is matched with someone they want or vice versa, don't change
+      if (potentialMatch.currentMatch != null && (potentialMatch.currentMatch.wants.contains(potentialMatch.name) || potentialMatch.wants.contains(potentialMatch.currentMatch.name))) {
+         return false;
+      }
+      
+      // If either wants to avoid, don't change
+      if (potentialMatch.avoids.contains(currentStudent.name) || currentStudent.avoids.contains(potentialMatch.name)) {
+         return false;
+      }
+      
+      // If the potential match wants current or vice versa or if their bucket difference is better
+      return potentialMatch.wants.contains(currentStudent.name)
+       || currentStudent.wants.contains(potentialMatch.name)
+       || (potentialMatch.currentMatch != null && Math.abs(potentialMatch.rank - potentialMatch.currentMatch.rank) < Math.abs(potentialMatch.rank - currentStudent.rank));
    }
    
    public static void printResults(List<Student> allStudents) {
@@ -159,12 +242,16 @@ public class PairMaker {
    
       for (Student s : allStudents) {
          if (!seenNames.contains(s.name)) {
-            System.out.println(s.name + " matched with " + s.currentMatch.name);
-            seenNames.add(s.currentMatch.name);
+         
+            if (s.currentMatch == null) {
+               System.out.println("Could not pair " + s.name);
+            } else {
+               System.out.println(s.name + ", " + s.currentMatch.name);
+               seenNames.add(s.currentMatch.name);
+            }
          }
       }
       
       System.out.println(seenNames.size() + " pairs created");
    }
 }
-

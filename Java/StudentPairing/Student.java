@@ -6,6 +6,7 @@ public class Student {
    public Student currentMatch;
    public double rank;
    public Set<String> seen;
+   public Set<String> wants;
    
    public Student(String name, double rank) {
       this.name = name;
@@ -13,5 +14,6 @@ public class Student {
       avoids = new HashSet<String>();
       currentMatch = null;
       seen = new HashSet<String>();
+      wants = new HashSet<String>();
    }
 }
