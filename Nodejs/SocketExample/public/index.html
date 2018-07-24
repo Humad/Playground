@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Socket example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <input id="message" type="text" name="">
+    <button id="send">Send message</button>
+    <ul id="messagesList">
+
+    </ul>
+</body>
+
+<script type="text/javascript">
+    console.log("Loading sockets");
+    var socket = io('localhost:3000');
+    $("#send").click(function() {
+        var message = $("#message").val();
+        $("#message").val('');
+        console.log("Sending message");
+        socket.emit('message', message);
+    });
+
+    socket.on('serverMessage', function(serverMessage) {
+        console.log("Receiving server message");
+        $("#messagesList").append("<li>" + serverMessage + "</li>");
+    });
+
+    socket.on("joinedRoom", function(newUsername) {
+        console.log("Receiving joined room");
+        $("#messagesList").append('<li style="color: red">' + newUsername + ' has joined the room.</li>');
+    });
+</script>
+</html>
