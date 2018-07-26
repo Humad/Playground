@@ -1,0 +1,18 @@
+[
+    {
+      "id": 2,
+      "rcode": "NXDOMAIN"
+    },
+    {
+      "id": 4,
+      "rcode": "NOERROR"
+    },
+    {
+      "id": 5,
+      "rcode": "SERVFAIL"
+    },
+    {
+      "id": 6,
+      "rcode": "REFUSED"
+    }
+  ]
