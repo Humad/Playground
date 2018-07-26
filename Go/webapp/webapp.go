@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"encoding/xml"
+	"sync"
 )
 
 type SiteMapIndex struct {
@@ -28,24 +29,42 @@ type NewsAggPage struct {
 	News map[string]NewsMap
 }
 
+var wg sync.WaitGroup
+
+func newsRoutine(c chan News, Location string) {
+	defer wg.Done()
+	var n News
+	resp, _ := http.Get(Location)
+	bytes, _ := ioutil.ReadAll(resp.Body)
+	xml.Unmarshal(bytes, &n)
+	resp.Body.Close()
+
+	c <- n
+}
+
 func newsAggHandler(w http.ResponseWriter, r *http.Request) {
 
 	var s SiteMapIndex
-	var n News
 	news_map := make(map[string]NewsMap)
 
 	resp, _ := http.Get("https://www.washingtonpost.com/news-sitemap-index.xml")
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	resp.Body.Close();
 	xml.Unmarshal(bytes, &s)
+
+	queue := make(chan News, 30)
 	
 	for _, Location := range s.Locations {
-		resp, _ = http.Get(Location)
-		bytes, _ = ioutil.ReadAll(resp.Body)
-		resp.Body.Close()
-		xml.Unmarshal(bytes, &n)
-		for idx, _ := range n.Keywords {
-			news_map[n.Titles[idx]] = NewsMap{Keyword: n.Keywords[idx], Location: n.Locations[idx]}
+		wg.Add(1)
+		go newsRoutine(queue, Location)
+	}
+
+	wg.Wait();
+	close(queue)
+
+	for element := range queue {
+		for index, _ := range element.Keywords {
+			news_map[element.Titles[index]] = NewsMap{Keyword: element.Keywords[index], Location: element.Locations[index]}
 		}
 	}
 
