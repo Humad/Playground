@@ -68,3 +68,6 @@ Simple date/time conversion.
 
 6. [URL Shortener](https://github.com/Humad/Project-Playground/tree/master/Nodejs/URLShortener): 
 A URL shortening service using MongoDB.
+
+# Go
+1. [News Aggregator](https://github.com/Humad/Project-Playground/tree/master/Go/webapp): Uses Washington Post sitemap to display articles.
