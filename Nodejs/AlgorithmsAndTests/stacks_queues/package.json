@@ -1,0 +1,14 @@
+{
+  "name": "horizon-stack-queue-exercises",
+  "private": true,
+  "version": "1.0.0",
+  "description": "In this exercise you will learn to apply recursive thinking and use the stack and queue data structures.",
+  "main": "stackfun.js",
+  "scripts": {
+    "test": "mocha ."
+  },
+  "author": "Aria Buckles",
+  "dependencies": {
+    "mocha": "^5.0.1"
+  }
+}
